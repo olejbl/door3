@@ -1,22 +1,30 @@
 import { useEffect, useState } from "react";
-import doors from './doors.json';
 import { getDoorsByProducer } from '../api';
+import producers from '../data/producers.json';
 
 const useDoor = () => {
-  const [producer, setProducer] = useState(null);
+  const [producer, setProducer] = useState(producers[0]);
   const [doors, setDoors] = useState([]);
   const [selectedDoor, setSelectedDoor] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const [background, setBackground] = useState(null);
 
   useEffect(() => {
     const fetchDoors = async () => {
       setLoading(true);
       try {
         await getDoorsByProducer(producer).then(res => {
-          console.log(res);
+          if (res.status === 200) {
+            setDoors(res.data.resources);
+          } else {
+            // Handle error
+            setDoors([]);
+          }
         }) 
       } catch(err) {
         // TODO: Catch error
+        setDoors([]);
       }
       setLoading(false);
     }
@@ -30,10 +38,9 @@ const useDoor = () => {
     producer, 
     setProducer,
     doors,
-    handleInput: (event) =>  {
-      const { target: { value } } = event;
-      setSelectedDoor(value);
-    }
+    loading,
+    background,
+    setBackground
   }
 };
 export {useDoor};
