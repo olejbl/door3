@@ -20,17 +20,19 @@ function App() {
         <div className="App">
             <Controls doorHook={doorHook}/>
             <Display doorHook={doorHook}/>
+            <ImageLoader/>
             <Box width={900}>
                 <Card sx={
                     {
                         p: 1,
                         borderRadius: 2,
-                        boxShadow: '0 0 16px rgba(0, 0, 0, .25)'
+                        boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
+                        overflow: 'hidden'
                     }
                 }>
                     <Heading as='h3'>
                         La deg inspirere!
-                    </Heading>
+                    </Heading>π
                     <ImageUpload/>
                     <Box px={2}>
 
@@ -38,8 +40,6 @@ function App() {
                             Swedoor doors
                         </Text>
                     </Box>
-                    <ImageLoader/>
-
                 </Card>
             </Box>
         </div>
