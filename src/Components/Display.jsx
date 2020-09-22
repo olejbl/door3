@@ -127,8 +127,10 @@ const DoorPreviewer = ({doorHook}) => {
     function transformed() {
       for (var a = [], b = [], i = 0, n = sourcePoints.length; i < n; ++i) {
         var s = sourcePoints[i], t = targetPoints[i];
-        a.push([s[0], s[1], 1, 0, 0, 0, -s[0] * t[0], -s[1] * t[0]]), b.push(t[0]);
-        a.push([0, 0, 0, s[0], s[1], 1, -s[0] * t[1], -s[1] * t[1]]), b.push(t[1]);
+        a.push([s[0], s[1], 1, 0, 0, 0, -s[0] * t[0], -s[1] * t[0]]);
+        b.push(t[0]);
+        a.push([0, 0, 0, s[0], s[1], 1, -s[0] * t[1], -s[1] * t[1]]);
+        b.push(t[1]);
       }
 
       var X = solve(a, b, true), matrix = [
