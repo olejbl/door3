@@ -11,7 +11,9 @@ const ControlsWrapper = styled.div`
 const DoorPicker = styled.div`
   display: flex;
   flex-direction: row;
-  overflow-y: scroll;
+  overflow-x: scroll;
+  overflow-y:hidden;
+  padding: 0.5em;
   width: 100%;
 `;
 const SingleDoor = styled.div`
