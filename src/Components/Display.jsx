@@ -75,6 +75,22 @@ const DoorPreviewWrapper = styled.div`
   height: 100%;
   position: relative;
 `;
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const CircleWrapper = styled.svg`
+  & circle {
+    opacity: 0;
+  }
+  &:hover circle {
+    opacity: 1;
+  }
+`;
 
 
 const TransformedDoor = ({ doorHook }) => {
@@ -181,21 +197,21 @@ const TransformedDoor = ({ doorHook }) => {
   return (
     <DoorPreviewWrapper onMouseUp={handleMouseUp} width="900px" height="500px">
       <CloudinaryContext cloudName="dikc1xnkv">
-      <Image publicId={selectedDoor.public_id} width={doorWidth} height={doorHeight} dpr="auto" quality="auto" />
-      <svg viewBox='0 0 900 500' onMouseDown={() => handleCirleChoice(4)}
-        style={
-          {
+        <ImageWrapper onMouseDown={() => handleCirleChoice(4)}
+          style={{
             transformOrigin: `${doorOffset.x}px ${doorOffset.y}px`,
             transform: `matrix3d(${transformationMatrix.toString()})`
-          } 
-        }>
-        <g transform={`translate(${doorOffset.x}, ${doorOffset.y})`} 
-          
-        >
-          <Image publicId={selectedDoor.public_id} width={doorWidth} height={doorHeight} dpr="auto" quality="auto" />
-        </g>
-      </svg>
-      <svg viewBox='0 0 900 500' onMouseMove={handleMouseMove}>
+          }} >
+          <Image style={{
+            transform: `translate(${-doorWidth}px, ${doorHeight}px)`, 
+            width: doorWidth+'px', 
+            height: doorHeight+'px',
+            imageRendering: 'crisp-edges'
+          }}
+           publicId={selectedDoor.public_id} width={doorWidth} height={doorHeight} q="100" />
+        </ImageWrapper>
+      </CloudinaryContext>
+      <CircleWrapper viewBox='0 0 900 500' onMouseMove={handleMouseMove}>
         <g transform={`translate(${doorOffset.x}, ${doorOffset.y})`}>
           <circle
             className="handle"
@@ -222,8 +238,7 @@ const TransformedDoor = ({ doorHook }) => {
             r="7"
           />
         </g>
-      </svg>
-      </CloudinaryContext>
+      </CircleWrapper>
     </DoorPreviewWrapper>
   );
 }; ///////////////her
