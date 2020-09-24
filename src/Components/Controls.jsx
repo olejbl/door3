@@ -6,6 +6,7 @@ import {CloudinaryContext, Image} from 'cloudinary-react';
 const ControlsWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  z-index: 100;
 `;
 
 const DoorPicker = styled.div`
