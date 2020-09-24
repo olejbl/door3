@@ -26,7 +26,7 @@ const SingleDoor = styled.div`
 
 const ImgUpload = styled.label`
   padding: 4em;
-  border: 0.5em lightgray dashed;
+  border: 0.5em  #97262C dashed;
   border-radius: 1em;
   display: block;
   margin: 0.5em;
