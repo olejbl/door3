@@ -11,21 +11,21 @@ const Button = styled.button `
   font-size: 36px;
   font-style: normal;
   font-weight: 700;
+  text-decoration: none;
+  padding: 0.25em 1em;
 
 `
 
 
 const OrderLink = ({doorHook}) => {
   const { selectedDoor } = doorHook;
+  const customLink = "https://www.ligaard.net/search?query=";
   if (selectedDoor == null) return(
     <p> </p>
   );
   else return (
     <div>
-      <Button href="www.vg.no"
-        onClick={(e) => {
-          console.log(selectedDoor.public_id)
-        }}>
+      <Button as="a" target="_blank" href={customLink + selectedDoor.public_id.split("/")[0]}>
           Bestill
       </Button>
     </div>

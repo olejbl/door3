@@ -30,7 +30,7 @@ const ImgUpload = styled.label`
   border: 0.5em  #97262C dashed;
   border-radius: 1em;
   display: block;
-  margin: 0.5em;
+  margin: 0.2em;
 `;
 
 const Controls = ({ doorHook }) => {
@@ -57,7 +57,7 @@ const Controls = ({ doorHook }) => {
         </ImgUpload>
       </div>
       <div>
-        <label htmlFor="inpProducers">Please select a producer</label>
+        <label htmlFor="inpProducers">Vennligst velg produsent </label>
         <select name="inpProducers" id="inpProducers" onChange={handleProducerChange}>
           { producers.map((prod) => (
             <option key={prod} value={prod}>{prod}</option>
