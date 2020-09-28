@@ -30,7 +30,10 @@ const ImgUpload = styled.label`
   border: 0.5em  #97262C dashed;
   border-radius: 1em;
   display: block;
+  width: 200px;
+  height: 50px;
   margin: 0.2em;
+  font-size: 16px;
 `;
 
 const Controls = ({ doorHook }) => {
@@ -40,6 +43,7 @@ const Controls = ({ doorHook }) => {
     const { target: { value } } = evt;
     setProducer(value);
   }
+  //Image uploader
   const handleFileChange = (evt) => {
     let reader = new FileReader();
     reader.onloadend = () => {
@@ -53,6 +57,7 @@ const Controls = ({ doorHook }) => {
     <ControlsWrapper>
       <div>
         <ImgUpload htmlFor="inpImage">
+          <p>Last opp et bilde av ditt inngangsparti </p>
           <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange}/>
         </ImgUpload>
       </div>

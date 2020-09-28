@@ -14,7 +14,7 @@ const Display = ({ doorHook }) => {
   
   if (!selectedDoor) return (
     <p>Vennligst velg en dør.</p>
-  );
+  )
 
   if (!background) return (
     <p>Last opp bilde!</p>
@@ -241,14 +241,18 @@ const TransformedDoor = ({ doorHook }) => {
       </CircleWrapper>
     </DoorPreviewWrapper>
   );
-}; ///////////////her
+};
 
 const DoorPreviewer = ({doorHook}) => {
-  const {background} = doorHook;
+  const {background, selectedDoor} = doorHook;
   return (
-    <DoorPreviewBackground bg={background}>
-      <TransformedDoor doorHook={doorHook}/>
-    </DoorPreviewBackground>
+    <div>
+      <p id="selectedDoorFormatted">{(selectedDoor.public_id).split("/")[0].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}</p>
+      <DoorPreviewBackground bg={background}>
+        <TransformedDoor doorHook={doorHook}/>
+      </DoorPreviewBackground>
+    </div>
+
   );
 }
 
