@@ -3,6 +3,7 @@ import './App.css';
 import {Controls} from "./Components/Controls";
 import {Display} from "./Components/Display";
 import {useDoor} from "./Components/hooks";
+import {OrderLink} from "./Components/OrderButton"
 import styled from 'styled-components';
 
 const AppWrapper = styled.div`
@@ -16,6 +17,7 @@ function App() {
         <AppWrapper className="App">
             <Controls doorHook={doorHook}/>
             <Display doorHook={doorHook}/>
+            <OrderLink doorHook={doorHook}/>
         </AppWrapper>
     );
 }

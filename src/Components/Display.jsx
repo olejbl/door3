@@ -13,11 +13,11 @@ const Display = ({ doorHook }) => {
   const { selectedDoor, background } = doorHook;
   
   if (!selectedDoor) return (
-    <p>Please select a door.</p>
+    <p>Vennligst velg en dør.</p>
   );
 
   if (!background) return (
-    <p>No background image selected!</p>
+    <p>Last opp bilde!</p>
   );
 
   return (

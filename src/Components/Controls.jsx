@@ -65,7 +65,7 @@ const Controls = ({ doorHook }) => {
         </select>
       </div>
       { loading ? (
-        <p>Loading ...</p>
+        <p>Laster inn dører ...</p>
       ) : (
         <DoorPicker>
         { doors.map((door) => (
