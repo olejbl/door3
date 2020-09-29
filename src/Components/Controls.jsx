@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import producers from '../data/producers';
 import {CloudinaryContext, Image} from 'cloudinary-react';
+import { Icon, InlineIcon } from '@iconify/react';
+import cameraFilled from '@iconify/icons-ant-design/camera-filled';
 
 const ControlsWrapper = styled.div`
   display: flex;
@@ -37,9 +39,9 @@ const ImgUpload = styled.label`
   }
   border-radius: 6px;
   display: block;
-  width: 200px;
+  width: 100px;
   height: 50px;
-  margin: auto;
+  margin: 50px auto;
   font-size: 20 px;
   color: white;
 `;
@@ -66,10 +68,10 @@ const Controls = ({ doorHook }) => {
     <CloudinaryContext cloudName="dikc1xnkv">
     <ControlsWrapper>
       <div>
-          <h1>Last opp et bilde av ditt inngangsparti </h1>
+          <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
         <ImgUpload htmlFor="inpImage">
+          <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '70px'}} />
           <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
-          <p> Klikk her</p>
         </ImgUpload>
       </div>
       <div>

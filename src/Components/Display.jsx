@@ -247,7 +247,8 @@ const DoorPreviewer = ({doorHook}) => {
   const {background, selectedDoor} = doorHook;
   return (
     <div>
-      <p id="selectedDoorFormatted">{(selectedDoor.public_id).split("/")[0].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}</p>
+      <p id="selectedDoorFormatted"> Du har valgt {(selectedDoor.public_id).split("/")[0].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}</p>
+      <p> For å flytte på eksempeldøren, trykk og dra hvert hjørne over den eksisterende døren.</p>
       <DoorPreviewBackground bg={background}>
         <TransformedDoor doorHook={doorHook}/>
       </DoorPreviewBackground>
