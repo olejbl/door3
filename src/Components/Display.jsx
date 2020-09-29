@@ -208,7 +208,7 @@ const TransformedDoor = ({ doorHook }) => {
             height: doorHeight+'px',
             imageRendering: 'crisp-edges'
           }}
-           publicId={selectedDoor.public_id} width={doorWidth} height={doorHeight} q="100" />
+           publicId={selectedDoor.public_id} width={doorWidth} height={doorHeight} q="100" loading="lazy" />
         </ImageWrapper>
       </CloudinaryContext>
       <CircleWrapper viewBox='0 0 900 500' onMouseMove={handleMouseMove}>

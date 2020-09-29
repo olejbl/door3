@@ -3,6 +3,10 @@
   z-index:0;
   font-family: Lato;
 }
+#inpImage {
+  
+
+}
 /*
 .parent {
   display: grid;
@@ -19,7 +23,7 @@
   position: relative;
 }
 */
-#root > div > div.imgImport {
+/* #root > div > div.imgImport {
    z-index: 1;
    position: absolute;
    left: 100px;
@@ -28,7 +32,7 @@
    flex-direction: row;
    flex-wrap: wrap;
    overflow-y: auto;
-  }
+  } */
 
 
 /*

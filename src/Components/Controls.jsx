@@ -7,6 +7,7 @@ const ControlsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 100;
+  background-color:#E7E7E7;
 `;
 
 const DoorPicker = styled.div`
@@ -15,7 +16,9 @@ const DoorPicker = styled.div`
   overflow-x: scroll;
   overflow-y:hidden;
   padding: 0.5em;
-  width: 100%;
+  width: 95vw;
+  margin: auto;
+  background-color: #ECECEC;
 `;
 const SingleDoor = styled.div`
   padding: 0.4em;
@@ -26,15 +29,21 @@ const SingleDoor = styled.div`
 `;
 
 const ImgUpload = styled.label`
-  padding: 4em;
-  border: 0.5em  #97262C dashed;
-  border-radius: 1em;
+  padding: 1em;
+  border: 0.1em  #97262C dashed;
+  background-color: #97262C;
+  &:hover {
+    transform: scale(1.05);
+  }
+  border-radius: 6px;
   display: block;
   width: 200px;
   height: 50px;
-  margin: 0.2em;
-  font-size: 16px;
+  margin: auto;
+  font-size: 20 px;
+  color: white;
 `;
+
 
 const Controls = ({ doorHook }) => {
   const { setProducer, producer, doors, setSelectedDoor, loading, setBackground } = doorHook;
@@ -50,19 +59,21 @@ const Controls = ({ doorHook }) => {
       setBackground(reader.result);
     }
     reader.readAsDataURL(evt.target.files[0]);
+    //consider using e_improve:[mode]:[blend] - mode: `outdoor` with cloudinary
   }
   
   return (
     <CloudinaryContext cloudName="dikc1xnkv">
     <ControlsWrapper>
       <div>
+          <h1>Last opp et bilde av ditt inngangsparti </h1>
         <ImgUpload htmlFor="inpImage">
-          <p>Last opp et bilde av ditt inngangsparti </p>
-          <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange}/>
+          <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
+          <p> Klikk her</p>
         </ImgUpload>
       </div>
       <div>
-        <label htmlFor="inpProducers">Vennligst velg produsent </label>
+        <label htmlFor="inpProducers">Velg produsent </label>
         <select name="inpProducers" id="inpProducers" onChange={handleProducerChange}>
           { producers.map((prod) => (
             <option key={prod} value={prod}>{prod}</option>
@@ -75,10 +86,10 @@ const Controls = ({ doorHook }) => {
         <DoorPicker>
         { doors.map((door) => (
           <SingleDoor key={door.public_id} onClick={() => setSelectedDoor(door)}>
-            <Image publicId={door.public_id} height="200" dpr="auto" responsiveloading="lazy" quality="auto" controls />
+            <Image publicId={door.public_id} height="200" dpr="auto" loading="lazy" quality="auto" controls />
           </SingleDoor>
         ))}
-      </DoorPicker>
+        </DoorPicker>
       )}
     </ControlsWrapper>
     </CloudinaryContext>
