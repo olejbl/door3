@@ -1,13 +1,13 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { useDoor } from "./hooks";
+// import { useDoor } from "./hooks";
 import { solve } from '../scripts/numeric-solve';
 import {CloudinaryContext, Image} from 'cloudinary-react';
 import * as d3 from 'd3';
 
-const DisplayWrapper = styled.div`
+// const DisplayWrapper = styled.div`
 
-`;
+// `;
 
 const Display = ({ doorHook }) => {
   const { selectedDoor, background } = doorHook;
@@ -61,15 +61,15 @@ const DoorPreviewBackground = styled.div`
   }
 `;
 
-const DraggableDoor = styled.svg`
-  border: solid 0.1em lightblue;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
+// const DraggableDoor = styled.svg`
+//   border: solid 0.1em lightblue;
+//   overflow: hidden;
+//   width: 100%;
+//   height: 100%;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+// `;
 
 const DoorPreviewWrapper = styled.div`
   overflow: hidden;
@@ -96,7 +96,7 @@ const CircleWrapper = styled.svg`
 
 
 const TransformedDoor = ({ doorHook }) => {
-  const { background, selectedDoor } = doorHook;
+  const { selectedDoor } = doorHook;
   const [ doorWidth, setDoorWidth ] = useState(0);
   const [ doorHeight, setDoorHeigt] = useState(0);
 
