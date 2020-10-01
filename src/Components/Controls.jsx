@@ -69,7 +69,7 @@ const Controls = ({ doorHook }) => {
     <ControlsWrapper>
       <div>
           <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
-          <p> For best resultater, ta bildet i godt sollys.</p>
+          <p> For best resultater, ta bildet i godt sollys. For best resultater, ta et horisontalt bilde.</p>
         <ImgUpload htmlFor="inpImage">
           <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '60px', margin: 'auto', display:'block'}} />
           <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
@@ -89,7 +89,7 @@ const Controls = ({ doorHook }) => {
         <DoorPicker>
         { doors.map((door) => (
           <SingleDoor key={door.public_id} onClick={() => setSelectedDoor(door)}>
-            <Image publicId={door.public_id} height="200" dpr="auto" loading="lazy" quality="auto" controls />
+            <Image publicId={door.public_id} height="200" width="100" dpr="auto" loading="lazy" quality="auto" controls />
           </SingleDoor>
         ))}
         </DoorPicker>

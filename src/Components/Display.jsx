@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, setState} from 'react';
 import styled from 'styled-components';
 // import { useDoor } from "./hooks";
 import { solve } from '../scripts/numeric-solve';
 import {CloudinaryContext, Image} from 'cloudinary-react';
 import * as d3 from 'd3';
 
-// const DisplayWrapper = styled.div`
+// const DisplayWrapper = styled.div` 
 
 // `;
 
@@ -17,7 +17,7 @@ const Display = ({ doorHook }) => {
   );
 
   if (!selectedDoor) return (
-    <p>Vennligst klikk på en dør.</p>
+    <h1>Du har lastet opp et bilde, vennligst klikk på en dør.</h1>
   )
 
 
@@ -28,8 +28,9 @@ const Display = ({ doorHook }) => {
 
 const DoorPreviewBackground = styled.div`
   background-image: url(${props => props.bg});
-  background-size: cover;
-  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
   position: relative;
   width: 900px;
   height: 500px;
@@ -37,7 +38,7 @@ const DoorPreviewBackground = styled.div`
   border: solid lightgray 0.2em;
   box-sizing: border-box;
   border-radius: 0.5em;
-  margin: auto 1em 1em 1em;
+  margin: auto auto auto 1em;
   
   & svg {
     position: absolute;
@@ -72,7 +73,7 @@ const DoorPreviewBackground = styled.div`
 // `;
 
 const DoorPreviewWrapper = styled.div`
-  overflow: hidden;
+  overflow: auto;
   width: 100%;
   height: 100%;
   position: relative;
@@ -93,12 +94,16 @@ const CircleWrapper = styled.svg`
     opacity: 1;
   }
 `;
+const ResetButton = styled.button `
+  z-index: 1;
+`
 
 
 const TransformedDoor = ({ doorHook }) => {
   const { selectedDoor } = doorHook;
   const [ doorWidth, setDoorWidth ] = useState(0);
-  const [ doorHeight, setDoorHeigt] = useState(0);
+  const [ doorHeight, setDoorHeight] = useState(0);
+  const [ reset, doReset ] = useState(0);
 
   const DEFAULT_MATRIX = [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0];
   const [ transformationMatrix, setTransformationMatrix] = useState(DEFAULT_MATRIX);
@@ -120,7 +125,7 @@ const TransformedDoor = ({ doorHook }) => {
     const h = height * scaler;
     if (w !== doorWidth || h !== doorHeight) {
       setDoorWidth(w);
-      setDoorHeigt(h);
+      setDoorHeight(h);
       setCorners({
         0: {x: 0, y: 0},
         1: {x: w, y: 0},
@@ -129,7 +134,8 @@ const TransformedDoor = ({ doorHook }) => {
       });
       setTransformationMatrix(DEFAULT_MATRIX);
     }
-  }, [selectedDoor]);
+    console.log(reset + "reset")
+  }, [selectedDoor, reset]);
 
   const handleCirleChoice = (index) => {
     console.log(index);
@@ -156,7 +162,7 @@ const TransformedDoor = ({ doorHook }) => {
     });
   }
 
-  const handleMouseMove = (evt) => {
+  const handleMouseMove = (evt) => {  
     if (evt.target.localName === 'svg') {
       const offset = evt.target.getBoundingClientRect();
       const x = evt.clientX - offset.left - doorOffset.x;
@@ -198,6 +204,11 @@ const TransformedDoor = ({ doorHook }) => {
 
   return (
     <DoorPreviewWrapper onMouseUp={handleMouseUp} width="900px" height="500px">
+      <button
+        onClick={() => {
+          doReset(prev => prev + Math.random());
+        }}
+      > Reset </button>
       <CloudinaryContext cloudName="dikc1xnkv">
         <ImageWrapper onMouseDown={() => handleCirleChoice(4)}
           style={{
@@ -242,11 +253,17 @@ const TransformedDoor = ({ doorHook }) => {
         </g>
       </CircleWrapper>
     </DoorPreviewWrapper>
+    
   );
 };
 
+
+
 const DoorPreviewer = ({doorHook}) => {
-  const {background, selectedDoor} = doorHook;
+  const {background, selectedDoor, setCorners} = doorHook;
+
+  
+
   return (
     <div>
       <p> For å flytte på eksempeldøren, trykk på den nye døren og dra hvert hjørne over den gamle døren.</p>
