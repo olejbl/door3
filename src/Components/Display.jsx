@@ -12,13 +12,14 @@ const DisplayWrapper = styled.div`
 const Display = ({ doorHook }) => {
   const { selectedDoor, background } = doorHook;
   
+  if (!background) return (
+    <p>Last opp et bilde av ditt inngangsparti først!</p>
+  );
+
   if (!selectedDoor) return (
-    <p>Vennligst velg en dør.</p>
+    <p>Vennligst klikk på en dør.</p>
   )
 
-  if (!background) return (
-    <p>Last opp bilde!</p>
-  );
 
   return (
     <DoorPreviewer doorHook={doorHook}/>
@@ -36,6 +37,7 @@ const DoorPreviewBackground = styled.div`
   border: solid lightgray 0.2em;
   box-sizing: border-box;
   border-radius: 0.5em;
+  margin: auto 1em 1em 1em;
   
   & svg {
     position: absolute;
@@ -247,8 +249,9 @@ const DoorPreviewer = ({doorHook}) => {
   const {background, selectedDoor} = doorHook;
   return (
     <div>
+      <p> For å flytte på eksempeldøren, trykk på den nye døren og dra hvert hjørne over den gamle døren.</p>
+      <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har? Mål opp og teip slik at det blir lettere å posisjonere døren riktig.</p>
       <p id="selectedDoorFormatted"> Du har valgt {(selectedDoor.public_id).split("/")[0].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}</p>
-      <p> For å flytte på eksempeldøren, trykk og dra hvert hjørne over den eksisterende døren.</p>
       <DoorPreviewBackground bg={background}>
         <TransformedDoor doorHook={doorHook}/>
       </DoorPreviewBackground>

@@ -17,8 +17,8 @@ const DoorPicker = styled.div`
   flex-direction: row;
   overflow-x: scroll;
   overflow-y:hidden;
-  padding: 0.5em;
-  width: 95vw;
+  padding: 0em;
+  width: 95%;
   margin: auto;
   background-color: #ECECEC;
 `;
@@ -37,13 +37,13 @@ const ImgUpload = styled.label`
   &:hover {
     transform: scale(1.05);
   }
-  border-radius: 6px;
+  border-radius: 5px;
   display: block;
   width: 100px;
   height: 50px;
-  margin: 50px auto;
-  font-size: 20 px;
+  margin: 30px auto;
   color: white;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15);
 `;
 
 
@@ -69,13 +69,14 @@ const Controls = ({ doorHook }) => {
     <ControlsWrapper>
       <div>
           <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
+          <p> For best resultater, ta bildet i godt sollys.</p>
         <ImgUpload htmlFor="inpImage">
-          <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '70px'}} />
+          <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '60px', margin: 'auto', display:'block'}} />
           <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
         </ImgUpload>
       </div>
       <div>
-        <label htmlFor="inpProducers">Velg produsent </label>
+        <label htmlFor="inpProducers">Velg produsent:  </label>
         <select name="inpProducers" id="inpProducers" onChange={handleProducerChange}>
           { producers.map((prod) => (
             <option key={prod} value={prod}>{prod}</option>
