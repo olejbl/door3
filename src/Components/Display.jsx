@@ -35,10 +35,8 @@ const DoorPreviewBackground = styled.div`
   width: 900px;
   height: 500px;
   padding: 0.4em;
-  border: solid lightgray 0.2em;
   box-sizing: border-box;
-  border-radius: 0.5em;
-  margin: auto auto auto 1em;
+  margin: auto auto 1em auto;
   
   & svg {
     position: absolute;
@@ -73,7 +71,7 @@ const DoorPreviewBackground = styled.div`
 // `;
 
 const DoorPreviewWrapper = styled.div`
-  overflow: auto;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   position: relative;
@@ -95,7 +93,8 @@ const CircleWrapper = styled.svg`
   }
 `;
 const ResetButton = styled.button `
-  z-index: 1;
+  z-index: 100;
+  position: relative;
 `
 
 
@@ -103,7 +102,7 @@ const TransformedDoor = ({ doorHook }) => {
   const { selectedDoor } = doorHook;
   const [ doorWidth, setDoorWidth ] = useState(0);
   const [ doorHeight, setDoorHeight] = useState(0);
-  const [ reset, doReset ] = useState(0);
+  const [ reset, setReset ] = useState(0);
 
   const DEFAULT_MATRIX = [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0];
   const [ transformationMatrix, setTransformationMatrix] = useState(DEFAULT_MATRIX);
@@ -123,7 +122,7 @@ const TransformedDoor = ({ doorHook }) => {
     const scaler = 200 / Math.max(width, height);
     const w = width * scaler;
     const h = height * scaler;
-    if (w !== doorWidth || h !== doorHeight) {
+    if (w !== doorWidth || h !== doorHeight || reset !== 0) {
       setDoorWidth(w);
       setDoorHeight(h);
       setCorners({
@@ -133,6 +132,7 @@ const TransformedDoor = ({ doorHook }) => {
         3: {x: 0, y: h},
       });
       setTransformationMatrix(DEFAULT_MATRIX);
+      setReset(0);
     }
     console.log(reset + "reset")
   }, [selectedDoor, reset]);
@@ -204,11 +204,11 @@ const TransformedDoor = ({ doorHook }) => {
 
   return (
     <DoorPreviewWrapper onMouseUp={handleMouseUp} width="900px" height="500px">
-      <button
+      <ResetButton id="resetButton"
         onClick={() => {
-          doReset(prev => prev + Math.random());
+          setReset(prev => prev + Math.random());
         }}
-      > Reset </button>
+      > Reset </ResetButton>
       <CloudinaryContext cloudName="dikc1xnkv">
         <ImageWrapper onMouseDown={() => handleCirleChoice(4)}
           style={{
@@ -268,6 +268,7 @@ const DoorPreviewer = ({doorHook}) => {
     <div>
       <p> For å flytte på eksempeldøren, trykk på den nye døren og dra hvert hjørne over den gamle døren.</p>
       <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har? Mål opp og teip slik at det blir lettere å posisjonere døren riktig.</p>
+      <p> For å vende om døren slik at du får dørhåndtaket på den andre siden, dra de to sirklene til venstre over til høyre side.</p>
       <p id="selectedDoorFormatted"> Du har valgt {(selectedDoor.public_id).split("/")[0].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}</p>
       <DoorPreviewBackground bg={background}>
         <TransformedDoor doorHook={doorHook}/>

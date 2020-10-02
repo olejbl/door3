@@ -69,7 +69,7 @@ const Controls = ({ doorHook }) => {
     <ControlsWrapper>
       <div>
           <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
-          <p> For best resultater, ta bildet i godt sollys. For best resultater, ta et horisontalt bilde.</p>
+          <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
         <ImgUpload htmlFor="inpImage">
           <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '60px', margin: 'auto', display:'block'}} />
           <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
