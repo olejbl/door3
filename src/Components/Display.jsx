@@ -85,6 +85,7 @@ const ImageWrapper = styled.div`
   top: 0;
   left: 0;
   touch-action: none;
+  padding: 1em;
 `;
 
 const CircleWrapper = styled.svg`
