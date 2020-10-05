@@ -167,8 +167,8 @@ const TransformedDoor = ({ doorHook }) => {
   const handleMouseMove = (evt) => {  
     if (evt.target.localName === 'svg') {
       const offset = evt.target.getBoundingClientRect();
-      const x = evt.clientX - offset.left - doorOffset.x;  //todo touch
-      const y = evt.clientY - offset.top - doorOffset.y;  //todo touch
+      const x = evt.clientX - offset.left - doorOffset.x; 
+      const y = evt.clientY - offset.top - doorOffset.y; 
       if (mouseState.targetCircle >= 0) {
         if (mouseState === 4) {
           console.log('Moving door');
@@ -179,7 +179,7 @@ const TransformedDoor = ({ doorHook }) => {
         } else {
           setCorners({
             ...corners,
-            [mouseState.targetCircle]: {x, y}  //todo touch
+            [mouseState.targetCircle]: {x, y}  
           });
           const doorCorners = [
             [0, 0],
@@ -202,10 +202,10 @@ const TransformedDoor = ({ doorHook }) => {
 
   const handleTouchMove = (evt) => {  
     if (evt.target.localName === 'circle') {
-      const offset = evt.target.getBoundingClientRect();
-      //console.log(evt.target.getBoundingClientRect().x)
-      const x = evt.touches[0].clientX - offset.left;  //todo touch
-      const y = evt.touches[0].clientY - offset.top;  //todo touch
+      const bodyRect = document.querySelector("#root > div > div:nth-child(2) > div > div > svg > g").getBoundingClientRect();
+      const x = evt.changedTouches[0].clientX - bodyRect.left;  //todo touch
+      const y = evt.changedTouches[0].clientY - bodyRect.top;  //todo touch
+      console.log(evt.changedTouches[0].clientX);
       //console.log(offset.left + ", " + offset.top);
       //console.log(evt.touches);
       if (mouseState.targetCircle >= 0) {
@@ -284,7 +284,6 @@ const TransformedDoor = ({ doorHook }) => {
             r="7"
             
           />
-          {console.log(corners)}
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(2)}
