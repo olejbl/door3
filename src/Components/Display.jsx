@@ -31,6 +31,7 @@ const DoorPreviewBackground = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+  background-color: #CECECE;
   position: relative;
   width: 900px;
   height: 500px;
@@ -74,7 +75,7 @@ const DoorPreviewWrapper = styled.div`
   overflow: hidden;
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
   touch-action: none;
 `;
 const ImageWrapper = styled.div`
@@ -202,16 +203,18 @@ const TransformedDoor = ({ doorHook }) => {
   const handleTouchMove = (evt) => {  
     if (evt.target.localName === 'circle') {
       const offset = evt.target.getBoundingClientRect();
-      const x = evt.touches[0].clientX -offset.left;  //todo touch
+      //console.log(evt.target.getBoundingClientRect().x)
+      const x = evt.touches[0].clientX - offset.left;  //todo touch
       const y = evt.touches[0].clientY - offset.top;  //todo touch
-      console.log(x + ", " + y);
+      //console.log(offset.left + ", " + offset.top);
+      //console.log(evt.touches);
       if (mouseState.targetCircle >= 0) {
         if (mouseState === 4) {
           console.log('Moving door');
-          setDoorOffset(
-            {x: doorOffset.x + x},
-            {y: doorOffset.y + y},
-          )
+          // setDoorOffset(
+          //   {x: doorOffset.x + x},
+          //   {y: doorOffset.y + y},
+          // )
         } else {
           setCorners({
             ...corners,
@@ -226,7 +229,6 @@ const TransformedDoor = ({ doorHook }) => {
     
           const circleCorners = Object.values(corners)
             .map(({x, y}) => [x, y]);
-          
           setTransformationMatrix(
             getMatrix(doorCorners, circleCorners)
           );
@@ -252,7 +254,7 @@ const TransformedDoor = ({ doorHook }) => {
         }}
       > Reset </ResetButton>
       <CloudinaryContext cloudName="dikc1xnkv">
-        <ImageWrapper onMouseDown={() => handleCirleChoice(4)}  
+        <ImageWrapper  
           style={{
             transformOrigin: `${doorOffset.x}px ${doorOffset.y}px`,
             transform: `matrix3d(${transformationMatrix.toString()})`
@@ -261,7 +263,6 @@ const TransformedDoor = ({ doorHook }) => {
             transform: `translate(${-doorWidth}px, ${doorHeight}px)`, 
             width: doorWidth+'px', 
             height: doorHeight+'px',
-            imageRendering: 'crisp-edges'
           }}
            publicId={selectedDoor.public_id} width={doorWidth} height={doorHeight} q="100" loading="lazy" />
         </ImageWrapper>
@@ -279,21 +280,23 @@ const TransformedDoor = ({ doorHook }) => {
             className="handle"
             onMouseDown={() => handleCirleChoice(1)}
             onTouchStart={() => handleCirleChoice(1)}
-            transform={`translate(${corners[1].x}, ${corners[1].y})`} 
+            transform={`translate(${corners[1].x+10}, ${corners[1].y})`} 
             r="7"
+            
           />
+          {console.log(corners)}
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(2)}
             onTouchStart={() => handleCirleChoice(2)}
-            transform={`translate(${corners[2].x}, ${corners[2].y})`} 
+            transform={`translate(${corners[2].x+10}, ${corners[2].y+10})`} 
             r="7"
           />
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(3)}
             onTouchStart={() => handleCirleChoice(3)}
-            transform={`translate(${corners[3].x}, ${corners[3].y})`} 
+            transform={`translate(${corners[3].x}, ${corners[3].y+10})`} 
             r="7"
           />
         </g>
@@ -302,12 +305,21 @@ const TransformedDoor = ({ doorHook }) => {
     
   );
 };
-
+const WordFormatter = (word) => {
+  let result = word.split("/")[0]; // splits string on first "/""
+  result = result.replace(/_/g, " "); // replaces "_" with whitespace
+  result = result.split(' '); // split into array 
+  result[0] = result[0].replace(/./,x=>x.toUpperCase()); //sets first letter of first word to uppercase
+  result[1] = result[1].replace(/./,x=>x.toUpperCase()); //sets first letter of second word to uppercase
+  result = Array.prototype.join.call(result, " "); //joins the pseudo-array
+  return result;
+}
 
 
 const DoorPreviewer = ({doorHook}) => {
   const {background, selectedDoor, setCorners} = doorHook;
 
+  
   
 
   return (
@@ -315,7 +327,7 @@ const DoorPreviewer = ({doorHook}) => {
       <p> For å flytte på eksempeldøren, trykk på den nye døren og dra hvert hjørne over den gamle døren.</p>
       <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har? Mål opp og teip slik at det blir lettere å posisjonere døren riktig.</p>
       <p> For å vende om døren slik at du får dørhåndtaket på den andre siden, dra de to sirklene til venstre over til høyre side.</p>
-      <p id="selectedDoorFormatted"> Du har valgt {(selectedDoor.public_id).split("/")[0].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}</p>
+      <p id="selectedDoorFormatted"> Du har valgt {WordFormatter((selectedDoor.public_id))}</p>
       <DoorPreviewBackground bg={background}>
         <TransformedDoor doorHook={doorHook}/>
       </DoorPreviewBackground>
