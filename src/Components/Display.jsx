@@ -85,7 +85,12 @@ const ImageWrapper = styled.div`
   top: 0;
   left: 0;
   touch-action: none;
-  padding: 1em;
+  /* padding: 1em; */
+
+  /*This prevents the Copy, Paste, Select... menu from appearing on mobile*/
+  -webkit-user-select: none; /* Safari */ 
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
 `;
 
 const CircleWrapper = styled.svg`
@@ -95,10 +100,15 @@ const CircleWrapper = styled.svg`
   &:hover circle {
     opacity: 1;
   }
+  padding: 1em;
 `;
 const ResetButton = styled.button `
   z-index: 100;
   position: relative;
+  /*This prevents the Copy, Paste, Select... menu from appearing on mobile*/
+  -webkit-user-select: none; /* Safari */ 
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
 `
 
 
@@ -254,7 +264,7 @@ const TransformedDoor = ({ doorHook }) => {
         onClick={() => {
           setReset(prev => prev + Math.random());
         }}
-      > Reset </ResetButton>
+      > Tilbakestill </ResetButton>
       <CloudinaryContext cloudName="dikc1xnkv">
         <ImageWrapper  
           style={{
@@ -275,14 +285,14 @@ const TransformedDoor = ({ doorHook }) => {
             className="handle"
             onMouseDown={() => handleCirleChoice(0)}
             onTouchStart={() => handleCirleChoice(0)}
-            transform={`translate(${corners[0].x}, ${corners[0].y})`} 
+            transform={`translate(${corners[0].x-5}, ${corners[0].y-15})`} 
             r="7"
           />
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(1)}
             onTouchStart={() => handleCirleChoice(1)}
-            transform={`translate(${corners[1].x+10}, ${corners[1].y})`} 
+            transform={`translate(${corners[1].x+10}, ${corners[1].y-15})`} 
             r="7"
             
           />
@@ -290,14 +300,14 @@ const TransformedDoor = ({ doorHook }) => {
             className="handle"
             onMouseDown={() => handleCirleChoice(2)}
             onTouchStart={() => handleCirleChoice(2)}
-            transform={`translate(${corners[2].x+10}, ${corners[2].y+10})`} 
+            transform={`translate(${corners[2].x+5}, ${corners[2].y+5})`} 
             r="7"
           />
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(3)}
             onTouchStart={() => handleCirleChoice(3)}
-            transform={`translate(${corners[3].x}, ${corners[3].y+10})`} 
+            transform={`translate(${corners[3].x-5}, ${corners[3].y+5})`} 
             r="7"
           />
         </g>
