@@ -133,8 +133,8 @@ const MainDoorControl = ({doorHook}) => {
         <p>Laster inn dører ...</p>
       ) : (
         <DoorPicker>
-        { doors.map((door) => { //TODO setSelected Main Door, chooses "producer" in controls.
-          if (door.context !== undefined && door.context.custom.alt == 'main'){  //checks that the image has a alt-text named main
+        { mainDoors.map((door) => { //TODO setSelected Main Door, chooses "producer" in controls.
+          if (true){  //checks that the image has a alt-text named main
               return (
                 <SingleDoor key={door.public_id} onClick={() => { 
                   handleMainDoorChange(door) //selects the main door, then shows the rest of the corresponding doors
