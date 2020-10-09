@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import producers from '../data/producers';
+import mainDoorLists from '../data/maindoorlists';
 import {CloudinaryContext, Image} from 'cloudinary-react';
 import { Icon, InlineIcon } from '@iconify/react';
 import cameraFilled from '@iconify/icons-ant-design/camera-filled';
@@ -22,6 +23,11 @@ const DoorPicker = styled.div`
   margin: auto;
   background-color: #ECECEC;
 `;
+
+const MainDoorPreviewer = styled.div`
+
+`;
+
 const SingleDoor = styled.div`
   padding: 0.4em;
   transition: 0.2s;
@@ -54,6 +60,7 @@ const Controls = ({ doorHook }) => {
     const { target: { value } } = evt;
     setProducer(value);
   }
+
   //Image uploader
   const handleFileChange = (evt) => {
     let reader = new FileReader();
@@ -70,6 +77,9 @@ const Controls = ({ doorHook }) => {
       <div>
           <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
           <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
+          <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har?  
+              Mål opp og teip slik at det blir lettere å posisjonere døren riktig.</p>
+
         <ImgUpload htmlFor="inpImage">
           <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '60px', margin: 'auto', display:'block'}} />
           <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
@@ -89,7 +99,7 @@ const Controls = ({ doorHook }) => {
         <DoorPicker>
         { doors.map((door) => (
           <SingleDoor key={door.public_id} onClick={() => setSelectedDoor(door)}>
-            <Image publicId={door.public_id} height="200" width="100" dpr="auto" loading="lazy" quality="auto" controls />
+            <Image publicId={door.public_id} height="150" width="75" dpr="auto" loading="lazy" quality="auto" controls />
           </SingleDoor>
         ))}
         </DoorPicker>
@@ -99,4 +109,50 @@ const Controls = ({ doorHook }) => {
   )
 };
 
-export {Controls};
+const MainDoorControl = ({doorHook}) => {
+  const { setProducer, selectedMainDoor, doors, setSelectedMainDoor, loading, setMainDoor, mainDoors } = doorHook;
+
+  const handleMainDoorChange = (door) => {
+    setSelectedMainDoor(door);
+    const value = (door.public_id).split("/")[0].split("_")[1];
+    setMainDoor(value);
+  }
+
+  return(
+    <CloudinaryContext cloudName="dikc1xnkv">
+    <ControlsWrapper>
+      <div>
+        <label htmlFor="inpProducers">Velg produsent:  </label>
+        <select name="inpProducers" id="inpProducers" >
+          { mainDoorLists.map((main) => ( //TODO Filters here 
+            <option key={main} value={main}>{main}</option>
+          ))}
+        </select>
+      </div>
+      { loading ? (
+        <p>Laster inn dører ...</p>
+      ) : (
+        <DoorPicker>
+        { doors.map((door) => { //TODO setSelected Main Door, chooses "producer" in controls.
+          if (door.context !== undefined && door.context.custom.alt == 'main'){  //checks that the image has a alt-text named main
+              return (
+                <SingleDoor key={door.public_id} onClick={() => { 
+                  handleMainDoorChange(door) //selects the main door, then shows the rest of the corresponding doors
+                }
+                }>
+                  <Image publicId={door.public_id} height="150" width="75" dpr="auto" loading="lazy" quality="auto" controls />
+                  {/* <Image alt={door.context.custom.alt} /> */}
+                  
+                </SingleDoor>
+                )
+          }
+        })
+        }
+        </DoorPicker>
+        )}
+    </ControlsWrapper>
+    </CloudinaryContext>
+  )
+}
+
+export { Controls, MainDoorControl};

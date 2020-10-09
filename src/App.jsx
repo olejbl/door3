@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Controls} from "./Components/Controls";
+import {Controls, MainDoorControl} from "./Components/Controls";
 import {Display} from "./Components/Display";
 import {useDoor} from "./Components/hooks";
 import {OrderLink} from "./Components/OrderButton"
@@ -16,6 +16,7 @@ function App() {
     return (
         <AppWrapper className="App">
             <Controls doorHook={doorHook}/>
+            <MainDoorControl doorHook={doorHook}/>
             <Display doorHook={doorHook}/>
             <OrderLink doorHook={doorHook}/>
         </AppWrapper>

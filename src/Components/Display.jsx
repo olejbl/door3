@@ -85,7 +85,6 @@ const ImageWrapper = styled.div`
   top: 0;
   left: 0;
   touch-action: none;
-  /* padding: 1em; */
 
   /*This prevents the Copy, Paste, Select... menu from appearing on mobile*/
   -webkit-user-select: none; /* Safari */ 
@@ -215,18 +214,12 @@ const TransformedDoor = ({ doorHook }) => {
   const handleTouchMove = (evt) => {  
     if (evt.target.localName === 'circle') {
       const bodyRect = document.querySelector("#root > div > div:nth-child(2) > div > div > svg > g").getBoundingClientRect();
-      const x = evt.changedTouches[0].clientX - bodyRect.left;  //todo touch
-      const y = evt.changedTouches[0].clientY - bodyRect.top;  //todo touch
+      const x = evt.changedTouches[0].clientX - bodyRect.left;  // touch
+      const y = evt.changedTouches[0].clientY - bodyRect.top;  // touch
       console.log(evt.changedTouches[0].clientX);
-      //console.log(offset.left + ", " + offset.top);
-      //console.log(evt.touches);
       if (mouseState.targetCircle >= 0) {
         if (mouseState === 4) {
-          console.log('Moving door');
-          // setDoorOffset(
-          //   {x: doorOffset.x + x},
-          //   {y: doorOffset.y + y},
-          // )
+          console.log('Moving door'); //not working 
         } else {
           setCorners({
             ...corners,
@@ -286,14 +279,14 @@ const TransformedDoor = ({ doorHook }) => {
             onMouseDown={() => handleCirleChoice(0)}
             onTouchStart={() => handleCirleChoice(0)}
             transform={`translate(${corners[0].x-5}, ${corners[0].y-15})`} 
-            r="7"
+            r="13"
           />
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(1)}
             onTouchStart={() => handleCirleChoice(1)}
             transform={`translate(${corners[1].x+10}, ${corners[1].y-15})`} 
-            r="7"
+            r="13"
             
           />
           <circle
@@ -301,14 +294,14 @@ const TransformedDoor = ({ doorHook }) => {
             onMouseDown={() => handleCirleChoice(2)}
             onTouchStart={() => handleCirleChoice(2)}
             transform={`translate(${corners[2].x+5}, ${corners[2].y+5})`} 
-            r="7"
+            r="13"
           />
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(3)}
             onTouchStart={() => handleCirleChoice(3)}
             transform={`translate(${corners[3].x-5}, ${corners[3].y+5})`} 
-            r="7"
+            r="13"
           />
         </g>
       </CircleWrapper>
@@ -336,7 +329,6 @@ const DoorPreviewer = ({doorHook}) => {
   return (
     <div>
       <p> For å flytte på eksempeldøren, trykk på den nye døren og dra hvert hjørne over den gamle døren.</p>
-      <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har? Mål opp og teip slik at det blir lettere å posisjonere døren riktig.</p>
       <p> For å vende om døren slik at du får dørhåndtaket på den andre siden, dra de to sirklene til venstre over til høyre side.</p>
       <p id="selectedDoorFormatted"> Du har valgt {WordFormatter((selectedDoor.public_id))}</p>
       <DoorPreviewBackground bg={background}>
