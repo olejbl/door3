@@ -7,8 +7,6 @@ import { Icon, InlineIcon } from '@iconify/react';
 import cameraFilled from '@iconify/icons-ant-design/camera-filled';
 
 const ControlsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
   z-index: 100;
   background-color:#E7E7E7;
 `;
@@ -29,10 +27,10 @@ const SubDoorPicker = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y:hidden;
   padding: 0em;
-  width: 95%;
+  width: 15vw;
   margin: auto;
   background-color: #ECECEC;
 `;
@@ -102,12 +100,12 @@ const Controls = ({ doorHook }) => {
     <ControlsWrapper>
       
       <div>
-        <label htmlFor="inpProducers">Velg produsent:  </label>
-        <select name="inpProducers" id="inpProducers" onChange={handleProducerChange}>
+        <label htmlFor="inpProducers">Velg farge.  </label>
+        <div name="inpProducers" id="inpProducers" onChange={handleProducerChange}>
           { producers.map((prod) => (
-            <option key={prod} value={prod}>{prod}</option>
+            <option key={prod} value={prod}></option>
           ))}
-        </select>
+        </div>
       </div>
       { loading ? (
         <p>Laster inn dører ...</p>
@@ -115,7 +113,7 @@ const Controls = ({ doorHook }) => {
         <SubDoorPicker id="subDoors">
         { doors.map((door) => (
           <SingleDoor key={door.public_id} onClick={() => setSelectedDoor(door)}>
-            <Image publicId={door.public_id} height="150" width="75" dpr="auto" loading="lazy" quality="auto" controls />
+            <Image publicId={door.public_id} height="100" width="50" dpr="auto" loading="lazy" quality="auto" controls />
           </SingleDoor>
         ))}
         </SubDoorPicker>
@@ -139,12 +137,12 @@ const MainDoorControl = ({doorHook}) => {
     <CloudinaryContext cloudName="dikc1xnkv">
     <ControlsWrapper>
       <div>
-        <label htmlFor="inpProducers">Velg produsent:  </label>
-        <select name="inpProducers" id="inpProducers" >
+        <label htmlFor="inpProducers">Velg dørmodell, du kan velge farge senere.  </label>
+        <div name="inpProducers" id="inpProducers" >
           { mainDoorLists.map((main) => ( //TODO Filters here 
-            <option key={main} value={main}>{main}</option>
+            <option key={main} value={main}></option>
           ))}
-        </select>
+        </div>
       </div>
       { loading ? (
         <p>Laster inn dører ...</p>

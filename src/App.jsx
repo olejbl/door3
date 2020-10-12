@@ -39,20 +39,20 @@ function App() {
                         <MainDoorControl doorHook={doorHook}/>
                     </Col>
                 </Row>
-                    <Col size={1}>
+                <Row>
+                <Col size={1}>
                         <Controls doorHook={doorHook}/>
                     </Col>
-                    <Col size={2}>
+                    <Col size={3}>
                         <Display doorHook={doorHook}/>
                     </Col>
-                <Row>
-
                 </Row>
             </Grid>
+            {/* <p>-----</p>
             <Controls doorHook={doorHook}/>
             <MainDoorControl doorHook={doorHook}/>
             <Display doorHook={doorHook}/>
-            <OrderLink doorHook={doorHook}/>
+            <OrderLink doorHook={doorHook}/> */}
         </AppWrapper>
     );
 }
