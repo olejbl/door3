@@ -16,6 +16,19 @@ const ControlsWrapper = styled.div`
 const DoorPicker = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  overflow-x: scroll;
+  overflow-y:hidden;
+  padding: 0em;
+  width: 95%;
+  margin: auto;
+  background-color: #ECECEC;
+`;
+
+const SubDoorPicker = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   overflow-x: scroll;
   overflow-y:hidden;
   padding: 0em;
@@ -51,7 +64,31 @@ const ImgUpload = styled.label`
   color: white;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
 `;
+const ImageUploader = ({ doorHook }) => {
+    const { setBackground } = doorHook;
+    //Image uploader
+    const handleFileChange = (evt) => {
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      setBackground(reader.result);
+    }
+    reader.readAsDataURL(evt.target.files[0]);
+    //consider using e_improve:[mode]:[blend] - mode: `outdoor` with cloudinary
+  }
+  return (
+    <div>
+      <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
+      <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
+      <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har?  
+          Mål opp og teip slik at det blir lettere å posisjonere døren riktig.</p>
 
+    <ImgUpload htmlFor="inpImage">
+      <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '60px', margin: 'auto', display:'block'}} />
+      <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
+    </ImgUpload>
+  </div>
+  )
+};
 
 const Controls = ({ doorHook }) => {
   const { setProducer, producer, doors, setSelectedDoor, loading, setBackground } = doorHook;
@@ -60,31 +97,10 @@ const Controls = ({ doorHook }) => {
     const { target: { value } } = evt;
     setProducer(value);
   }
-
-  //Image uploader
-  const handleFileChange = (evt) => {
-    let reader = new FileReader();
-    reader.onloadend = () => {
-      setBackground(reader.result);
-    }
-    reader.readAsDataURL(evt.target.files[0]);
-    //consider using e_improve:[mode]:[blend] - mode: `outdoor` with cloudinary
-  }
-  
   return (
     <CloudinaryContext cloudName="dikc1xnkv">
     <ControlsWrapper>
-      <div>
-          <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
-          <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
-          <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har?  
-              Mål opp og teip slik at det blir lettere å posisjonere døren riktig.</p>
-
-        <ImgUpload htmlFor="inpImage">
-          <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '60px', margin: 'auto', display:'block'}} />
-          <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
-        </ImgUpload>
-      </div>
+      
       <div>
         <label htmlFor="inpProducers">Velg produsent:  </label>
         <select name="inpProducers" id="inpProducers" onChange={handleProducerChange}>
@@ -96,13 +112,13 @@ const Controls = ({ doorHook }) => {
       { loading ? (
         <p>Laster inn dører ...</p>
       ) : (
-        <DoorPicker>
+        <SubDoorPicker id="subDoors">
         { doors.map((door) => (
           <SingleDoor key={door.public_id} onClick={() => setSelectedDoor(door)}>
             <Image publicId={door.public_id} height="150" width="75" dpr="auto" loading="lazy" quality="auto" controls />
           </SingleDoor>
         ))}
-        </DoorPicker>
+        </SubDoorPicker>
       )}
     </ControlsWrapper>
     </CloudinaryContext>
@@ -115,7 +131,8 @@ const MainDoorControl = ({doorHook}) => {
   const handleMainDoorChange = (door) => {
     setSelectedMainDoor(door);
     const value = (door.public_id).split("/")[0].split("_")[1];
-    setMainDoor(value);
+    //setMainDoor(value);
+    setProducer(value);
   }
 
   return(
@@ -141,8 +158,6 @@ const MainDoorControl = ({doorHook}) => {
                 }
                 }>
                   <Image publicId={door.public_id} height="150" width="75" dpr="auto" loading="lazy" quality="auto" controls />
-                  {/* <Image alt={door.context.custom.alt} /> */}
-                  
                 </SingleDoor>
                 )
           }
@@ -155,4 +170,4 @@ const MainDoorControl = ({doorHook}) => {
   )
 }
 
-export { Controls, MainDoorControl};
+export { Controls, MainDoorControl, ImageUploader};
