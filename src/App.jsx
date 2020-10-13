@@ -27,7 +27,7 @@ function App() {
     const doorHook = useDoor();
 
     useEffect(() => {
-        ReactGA.initialize('your tracking Id');
+        ReactGA.initialize('G-95C945N79V');
         ReactGA.pageview(window.location.pathname);
       })
 
