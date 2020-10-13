@@ -65,7 +65,7 @@ function LU(A, fast) {
     }
     P[k] = Pk;
 
-    if (Pk != k) {
+    if (Pk !== k) {
       A[k] = A[Pk];
       A[Pk] = Ak;
       Ak = A[k];

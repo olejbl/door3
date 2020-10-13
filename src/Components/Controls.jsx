@@ -105,7 +105,7 @@ const ImageUploader = ({ doorHook }) => {
 };
 
 const Controls = ({ doorHook }) => {
-  const { setProducer, doors, setSelectedDoor, loading } = doorHook;
+  const { doors, setSelectedDoor, loading } = doorHook;
 
   // const handleProducerChange = (evt) => {
   //   const { target: { value } } = evt;
