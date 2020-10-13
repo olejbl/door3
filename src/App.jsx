@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
 import './App.css';
-import {Controls, MainDoorControl, ImageUploader} from "./Components/Controls";
+import {Controls, ImageUploader} from "./Components/Controls";
+import {MainDoorControl} from "./Components/MainDoorControl";
 import {Filters} from "./Components/Filters";
 import {Display} from "./Components/Display";
 import {useDoor} from "./Components/hooks";

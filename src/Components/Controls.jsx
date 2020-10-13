@@ -182,4 +182,4 @@ const MainDoorControl = ({doorHook}) => {
   )
 }
 
-export { Controls, MainDoorControl, ImageUploader};
+export { Controls, ImageUploader};
