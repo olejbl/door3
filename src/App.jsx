@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './App.css';
 import {Controls, MainDoorControl, ImageUploader} from "./Components/Controls";
 import {Filters} from "./Components/Filters";
@@ -6,6 +6,7 @@ import {Display} from "./Components/Display";
 import {useDoor} from "./Components/hooks";
 import {OrderLink} from "./Components/OrderButton"
 import styled from 'styled-components';
+import ReactGA from "react-ga";  //Google Analytics
 
 const AppWrapper = styled.div`
     /* display: flex;
@@ -24,6 +25,12 @@ const Col = styled.div`
 
 function App() {
     const doorHook = useDoor();
+
+    useEffect(() => {
+        ReactGA.initialize('your tracking Id');
+        ReactGA.pageview(window.location.pathname);
+      })
+
     return (
         <AppWrapper className="App">
             <Grid>
