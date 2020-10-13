@@ -12,6 +12,7 @@ const useDoor = () => {
   const [selectedMainDoor, setSelectedMainDoor] = useState(null);
   const [mainDoors, setMainDoors] = useState ([]);
   const [background, setBackground] = useState(null);
+  const [select, setSelect] = useState("main");
 
   useEffect(() => {
     const fetchDoors = async () => {
@@ -71,7 +72,9 @@ const useDoor = () => {
     doors,
     loading,
     background,
-    setBackground
+    setBackground,
+    select,
+    setSelect
   }
 };
 export {useDoor};

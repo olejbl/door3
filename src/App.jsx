@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Controls, MainDoorControl, ImageUploader} from "./Components/Controls";
+import {Filters} from "./Components/Filters";
 import {Display} from "./Components/Display";
 import {useDoor} from "./Components/hooks";
 import {OrderLink} from "./Components/OrderButton"
@@ -30,23 +31,32 @@ function App() {
                     <Col size={1}>
                         <ImageUploader doorHook={doorHook}/>
                     </Col>
+                    <Col size={3}>
+                    <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
+                    <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
+                    <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har?  
+                        Mål opp og teip slik at det blir lettere å posisjonere døren riktig.</p>
+                    </Col>
                 </Row>
                 <Row>
                     <Col size={1}>
-                        <p> Filtere her </p>
+                        <Filters doorHook={doorHook}/>
                     </Col>
-                    <Col size={2}>
+                    <Col size={3}>
                         <MainDoorControl doorHook={doorHook}/>
                     </Col>
                 </Row>
                 <Row>
                 <Col size={1}>
                         <Controls doorHook={doorHook}/>
+                        <p></p>
+                        <OrderLink doorHook={doorHook}/>
                     </Col>
                     <Col size={3}>
                         <Display doorHook={doorHook}/>
                     </Col>
                 </Row>
+                
             </Grid>
             {/* <p>-----</p>
             <Controls doorHook={doorHook}/>

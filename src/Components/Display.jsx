@@ -1,4 +1,4 @@
-import React, {useEffect, useState, setState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 // import { useDoor } from "./hooks";
 import { solve } from '../scripts/numeric-solve';
@@ -279,14 +279,14 @@ const TransformedDoor = ({ doorHook }) => {
             onMouseDown={() => handleCirleChoice(0)}
             onTouchStart={() => handleCirleChoice(0)}
             transform={`translate(${corners[0].x-5}, ${corners[0].y-15})`} 
-            r="13"
+            r="7"
           />
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(1)}
             onTouchStart={() => handleCirleChoice(1)}
             transform={`translate(${corners[1].x+10}, ${corners[1].y-15})`} 
-            r="13"
+            r="7"
             
           />
           <circle
@@ -294,14 +294,14 @@ const TransformedDoor = ({ doorHook }) => {
             onMouseDown={() => handleCirleChoice(2)}
             onTouchStart={() => handleCirleChoice(2)}
             transform={`translate(${corners[2].x+5}, ${corners[2].y+5})`} 
-            r="13"
+            r="7"
           />
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(3)}
             onTouchStart={() => handleCirleChoice(3)}
             transform={`translate(${corners[3].x-5}, ${corners[3].y+5})`} 
-            r="13"
+            r="7"
           />
         </g>
       </CircleWrapper>
@@ -321,7 +321,7 @@ const WordFormatter = (word) => {
 
 
 const DoorPreviewer = ({doorHook}) => {
-  const {background, selectedDoor, setCorners} = doorHook;
+  const {background, selectedDoor} = doorHook;
 
   
   
