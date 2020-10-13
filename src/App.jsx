@@ -27,7 +27,7 @@ function App() {
     const doorHook = useDoor();
 
     useEffect(() => {
-        ReactGA.initialize('G-95C945N79V');
+        ReactGA.initialize('UA-180462469-1');
         ReactGA.pageview(window.location.pathname);
       })
 
