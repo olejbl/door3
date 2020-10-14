@@ -43,7 +43,7 @@ function App() {
                     <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
                     <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
                     <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har?  
-                        Mål opp og teip slik at det blir lettere å posisjonere døren riktig.</p>
+                        Mål opp og teip slik at det blir lettere å posisjonere døren riktig. Ønsker du en spesialfarge, kan du velge det i nettbutikken.</p>
                     </Col>
                 </Row>
                 <Row>
@@ -64,13 +64,7 @@ function App() {
                         <Display doorHook={doorHook}/>
                     </Col>
                 </Row>
-                
             </Grid>
-            {/* <p>-----</p>
-            <Controls doorHook={doorHook}/>
-            <MainDoorControl doorHook={doorHook}/>
-            <Display doorHook={doorHook}/>
-            <OrderLink doorHook={doorHook}/> */}
         </AppWrapper>
     );
 }

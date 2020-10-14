@@ -330,7 +330,7 @@ const DoorPreviewer = ({doorHook}) => {
     <div>
       <p> For å flytte på eksempeldøren, trykk på den nye døren og dra hvert hjørne over den gamle døren.</p>
       <p> For å vende om døren slik at du får dørhåndtaket på den andre siden, dra de to sirklene til venstre over til høyre side.</p>
-      <p id="selectedDoorFormatted"> Du har valgt {WordFormatter((selectedDoor.public_id))}</p>
+      <p id="selectedDoorFormatted"> Du har valgt:  <b> {WordFormatter((selectedDoor.public_id))}</b> </p>
       <DoorPreviewBackground bg={background}>
         <TransformedDoor doorHook={doorHook}/>
       </DoorPreviewBackground>

@@ -6,14 +6,16 @@ const ControlsWrapper = styled.div`
   z-index: 100;
   background-color:#E7E7E7;
   min-height: 300px;
+  max-height: 400px;
+  overflow-y: scroll;
 `;
 
 const DoorPicker = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  overflow-x: scroll;
-  overflow-y:hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   padding: 0em;
   width: 95%;
   margin: auto;

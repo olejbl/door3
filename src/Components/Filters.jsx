@@ -53,12 +53,12 @@ const RadioButton = styled.input`
     }
   }
   &:checked + ${Item} {
-    background: #8BC34A;
-    border: 2px solid #8BC34A;
+    background: #2c9726;
+    border: 2px solid #2c9726;
   }
   &:checked + ${RadioButtonLabel} {
-    background: #8BC34A;
-    border: 1px solid #8BC34A;
+    background: #2c9726;
+    border: 1px solid #2c9726;
     &::after {
       display: block;
       color: white;

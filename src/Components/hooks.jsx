@@ -7,11 +7,11 @@ const useDoor = () => {
   const [producer, setProducer] = useState(producers[0]);
   const [mainDoorList, setMainDoorList] = useState(mainDoorLists[0]);
   const [doors, setDoors] = useState([]);
-  const [selectedDoor, setSelectedDoor] = useState(null);
+  const [selectedDoor, setSelectedDoor] = useState({"public_id":"swedoor_debussy/Classic_Debussy_NCS_S_4050-Y80R_decor_1_prdggo","version":1601469857,"format":"jpg","width":713,"height":1500,"type":"upload","created_at":"2020-09-30T12:44:17Z"});
   const [loading, setLoading] = useState(false);
-  const [selectedMainDoor, setSelectedMainDoor] = useState(null);
+  const [selectedMainDoor, setSelectedMainDoor] = useState({"public_id":"swedoor_debussy/Classic_Debussy_NCS_S_4050-Y80R_decor_1_prdggo","version":1601469857,"format":"jpg","width":713,"height":1500,"type":"upload","created_at":"2020-09-30T12:44:17Z"});
   const [mainDoors, setMainDoors] = useState ([]);
-  const [background, setBackground] = useState(null);
+  const [background, setBackground] = useState("https://res.cloudinary.com/dikc1xnkv/image/upload/eksempelbilde.jpg");
   const [select, setSelect] = useState("main");
 
   useEffect(() => {
