@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import {CloudinaryContext, Image} from 'cloudinary-react';
+import React from "react";
+import styled from "styled-components";
+import { CloudinaryContext, Image } from "cloudinary-react";
 
 const ControlsWrapper = styled.div`
   z-index: 100;
-  background-color:#E7E7E7;
+  background-color: #e7e7e7;
   min-height: 300px;
   max-height: 400px;
   overflow-y: scroll;
@@ -19,7 +19,7 @@ const DoorPicker = styled.div`
   padding: 0em;
   width: 95%;
   margin: auto;
-  background-color: #ECECEC;
+  background-color: #ececec;
 `;
 
 const SingleDoor = styled.div`
@@ -30,48 +30,63 @@ const SingleDoor = styled.div`
   }
 `;
 
-const MainDoorControl = ({doorHook}) => {
-  const { setProducer, setSelectedMainDoor, loading, setSelectedDoor, mainDoors } = doorHook;
+const MainDoorControl = ({ doorHook }) => {
+  const {
+    setProducer,
+    setSelectedMainDoor,
+    loading,
+    setSelectedDoor,
+    mainDoors,
+  } = doorHook;
 
   const handleMainDoorChange = (door) => {
     setSelectedMainDoor(door);
-    setSelectedDoor(door)
-    const value = (door.public_id).split("/")[0].split("_")[1];
+    setSelectedDoor(door);
+    const value = door.public_id.split("/")[0].split("_")[1];
     //setMainDoor(value);
     setProducer(value);
-  }
+  };
 
-  return(
+  return (
     <CloudinaryContext cloudName="dikc1xnkv">
-    <ControlsWrapper>
-      <div>
-        <b>Velg dørmodell, du kan velge farge senere.  </b>
-        {/* <div name="filters" id="filters" >
+      <ControlsWrapper>
+        <div>
+          <b>Velg dørmodell, du kan velge farge senere. </b>
+          {/* <div name="filters" id="filters" >
         <select name="inpProducers" id="inpProducers" onChange={""}>
           { mainDoorLists.map((main) => ( //TODO Filters here 
             <option key={main} value={main}>{main}</option>
           ))}
         </select>
         </div> */}
-      </div>
+        </div>
         <DoorPicker>
-        { mainDoors.map((door) => {   
-          if (true){
+          {mainDoors.map((door) => {
+            if (true) {
               return (
-                <SingleDoor key={door.public_id} onClick={() => { 
-                  handleMainDoorChange(door) //selects the main door, then shows the rest of the corresponding doors
-                }
-                }>
-                  <Image publicId={door.public_id} height="150" width="75" dpr="auto" loading="lazy" quality="auto" controls />
+                <SingleDoor
+                  key={door.public_id || door}
+                  onClick={() => {
+                    handleMainDoorChange(door); //selects the main door, then shows the rest of the corresponding doors
+                  }}
+                >
+                  <Image
+                    publicId={door.public_id || door}
+                    height="150"
+                    width="75"
+                    dpr="auto"
+                    loading="lazy"
+                    quality="auto"
+                    controls
+                  />
                 </SingleDoor>
-                )
-          }
-        })
-        }
+              );
+            }
+          })}
         </DoorPicker>
-    </ControlsWrapper>
+      </ControlsWrapper>
     </CloudinaryContext>
-  )
-}
+  );
+};
 
-export {MainDoorControl};
+export { MainDoorControl };

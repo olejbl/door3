@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import './App.css';
 import {Controls, ImageUploader} from "./Components/Controls";
 import {MainDoorControl} from "./Components/MainDoorControl";
-import {Filters} from "./Components/Filters";
+import {MultiselectCheckbox} from "./Components/Filters";
 import {Display} from "./Components/Display";
 import {useDoor} from "./Components/hooks";
 import {OrderLink} from "./Components/OrderButton"
@@ -48,7 +48,7 @@ function App() {
                 </Row>
                 <Row>
                     <Col size={1}>
-                        <Filters doorHook={doorHook}/>
+                        <MultiselectCheckbox doorHook={doorHook}/>
                     </Col>
                     <Col size={3}>
                         <MainDoorControl doorHook={doorHook}/>
