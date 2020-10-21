@@ -39,11 +39,18 @@ const MainDoorControl = ({ doorHook }) => {
     mainDoors,
   } = doorHook;
 
+  const getDoorValue = (door) => {
+    if (door.hasOwnProperty("public.id")) {
+      return door.public_id.split("/")[0].split("_")[1];
+    } else {
+      return door.split("/")[0].split("_")[1];
+    }
+  };
+
   const handleMainDoorChange = (door) => {
     setSelectedMainDoor(door);
     setSelectedDoor(door);
     const value = door.public_id.split("/")[0].split("_")[1];
-    //setMainDoor(value);
     setProducer(value);
   };
 

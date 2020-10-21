@@ -114,23 +114,27 @@ const MultiselectCheckbox = ({ doorHook }) => {
         const {
           data: { resources },
         } = await getDoorsByProducer(prop);
-
-        resources.forEach((door) => doors.push(door.public_id));
+        doors.push(...resources);
+        //resources.forEach((door) => doors.push(door.public_id));
       }
 
-      const uniq = doors
-        .map((door) => {
-          return {
-            count: 1,
-            name: door,
-          };
-        })
-        .reduce((a, b) => {
-          a[b.name] = (a[b.name] || 0) + b.count;
-          return a;
-        }, {});
+      const doorCount = {};
 
-      const duplicates = Object.keys(uniq).filter((a) => uniq[a] > 1);
+      // Count appearances
+      const duplicates = [];
+      // Looper alle dørene
+      for (const door of doors) {
+        // Om den er lagt til, inkrementer telleren
+        if (doorCount[door.public_id]) {
+          doorCount[door.public_id]++;
+          // Hvis det er første gang den forekommer som duplikat, ikke interessant om det er 3, 4, 5, 6
+          if (doorCount[door.public_id] === checkedBoxes.length) {
+            duplicates.push(door);
+          }
+        } else {
+          doorCount[door.public_id] = 1;
+        }
+      }
 
       if (duplicates.length !== 0) {
         doors = duplicates;

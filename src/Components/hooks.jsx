@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getDoorsByProducer } from '../api';
 import producers from '../data/producers.json';
 import mainDoorLists from '../data/maindoorlists.json';
+import data from "@iconify/icons-ant-design/camera-filled";
 
 const useDoor = () => {
   const [producer, setProducer] = useState(producers[0]);
