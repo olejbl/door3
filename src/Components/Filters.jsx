@@ -16,6 +16,7 @@ const Item = styled.div`
   position: relative;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  width: 90%;
   border-radius: 2px;
   margin-bottom: 10px;
   background: white;
@@ -81,28 +82,24 @@ const style = {
   },
 };
 
-// const Filters = ({doorHook}) => {
-//   const { setMainDoorList, select, setSelect } = doorHook;
-//   // TODO husk å sette til standard verdier på producer når filteret uncheckes #### evt alle
-//   // const handleFilterChange = (evt) => {
-//   //   const { target: { value } } = evt;
-//   // }
-//const options = [{ label: 'Item One' }, { label: 'Item Two' }];
-//TODO 1 - Check hvilket filter du vil ha
-//TODO 2 - fetchFilters( filteret du ville ha ) https://res.cloudinary.com/dikc1xnkv/image/list/${FILTERET}.json`
-//TODO 3 - Kombinér JSON med alle andre filter-JSON som er valgt, velg de som går igjen i alle
-//TODO 4 - returner liste med json-objekter som oppstår i alle JSON
 
 const MultiselectCheckbox = ({ doorHook }) => {
   const { setMainDoors } = doorHook;
   const [data, setData] = React.useState([
-    { label: "Alle", prop: "main", checked: false },
-    { label: "Med glass", prop: "glass", checked: false },
-    { label: "Tradisjonell", prop: "tradisjonell", checked: false },
-    { label: "Moderne", prop: "moderne", checked: false },
+    { label: "Vis alle", prop: "main", checked: true },                     // data[0]
+    { label: "Tradisjonell", prop: "tradisjonell", checked: false },     // data[3]
+    { label: "Moderne", prop: "moderne", checked: false },               // data[4]
+    { label: "Med glass", prop: "glass", checked: false },               // data[1]
+    { label: "Uten glass", prop: "uglass", checked: false },             // data[2]
   ]);
 
   React.useEffect(() => {
+    const updateFieldChanged = index => e => {
+      let newArr = [...data]; // copying the old datas array
+      newArr[index] = e.target.value;
+      setData(newArr); 
+    };  
+
     const checkedBoxes = data
       .filter((box) => box.checked)
       .map((box) => box.prop);
@@ -115,7 +112,6 @@ const MultiselectCheckbox = ({ doorHook }) => {
           data: { resources },
         } = await getDoorsByProducer(prop);
         doors.push(...resources);
-        //resources.forEach((door) => doors.push(door.public_id));
       }
 
       const doorCount = {};
@@ -127,7 +123,7 @@ const MultiselectCheckbox = ({ doorHook }) => {
         // Om den er lagt til, inkrementer telleren
         if (doorCount[door.public_id]) {
           doorCount[door.public_id]++;
-          // Hvis det er første gang den forekommer som duplikat, ikke interessant om det er 3, 4, 5, 6
+          // Sjekker om det er likt antall duplikater som antall bokser checked. 
           if (doorCount[door.public_id] === checkedBoxes.length) {
             duplicates.push(door);
           }
@@ -146,84 +142,65 @@ const MultiselectCheckbox = ({ doorHook }) => {
   }, [data]);
 
   const handleClick = (index) => {
+    const target = index;
     const newData = [...data];
     const oldObject = newData[index];
     const newObject = { ...oldObject, checked: !oldObject["checked"] };
     newData[index] = newObject;
+    // sets all to false, so we avoid filter problems
+    if(target == 0){
+      newData[1] = {...newData[1], checked: false}
+      newData[2] = {...newData[2], checked: false}
+      newData[3] = {...newData[3], checked: false}
+      newData[4] = {...newData[4], checked: false}
+
+    }
+    // unchecks sibling
+    if(target == 1){
+      newData[0] = {...newData[0], checked: false} // unchecks view all
+      newData[1] = {...newData[1], checked: (newData[1].checked)}
+      newData[2] = {...newData[2], checked: (!newData[1].checked)} 
+      };
+    //unchecks sibling
+    if(target == 2){
+      newData[0] = {...newData[0], checked: false} //unchecks view all
+      newData[1] = {...newData[1], checked: (!newData[2].checked)}
+      newData[2] = {...newData[2], checked: (newData[2].checked)}
+    };
+    // unchecks sibling
+    if(target == 3){
+      newData[0] = {...newData[0], checked: false} // unchecks view all
+      newData[3] = {...newData[3], checked: (newData[3].checked)}
+      newData[4] = {...newData[4], checked: (!newData[3].checked)} 
+      };
+    //unchecks sibling
+    if(target == 4){
+      newData[0] = {...newData[0], checked: false} //unchecks view all
+      newData[3] = {...newData[3], checked: (!newData[4].checked)}
+      newData[4] = {...newData[4], checked: (newData[4].checked)}
+    };
     setData(newData);
+    console.log("newObject: " + newObject);
   };
 
   return (
     <ul style={style.listContainer}>
       {data.map((item, index) => {
         return (
-          <li
-            key={item.label}
-            style={style.itemStyle}
-            onClick={() => handleClick(index)}
-          >
-            <input readOnly type="checkbox" checked={item.checked} />
-            {item.label}
-          </li>
+          <div>
+            <Item
+              key={item.label}
+              style={item.checked ? {backgroundColor: '#E5F2E4'} : {backgroundColor: '#F2E4E5'}}
+              onClick={() => handleClick(index)}
+              >
+              <input readOnly type="checkbox" checked={item.checked} className="visually-hidden"/>
+              {item.label}
+            </Item>
+          </div>
         );
       })}
     </ul>
   );
 };
-
-// const handleSelectChange = event => {
-//   const value = event.target.value;
-//   setSelect(value);
-//   setMainDoorList(value);
-// };
-// return (
-//   <Wrapper>
-//     <Item active={select === "main"}>
-//       <RadioButton
-//         type="radio"
-//         name="radio"
-//         value="main"
-//         checked={select === "main"}
-//         onChange={event => handleSelectChange(event)}
-//         />
-//       <RadioButtonLabel />
-//       <div>Vis alle</div>
-//     </Item>
-//     <Item active={select === "glass"}>
-//       <RadioButton
-//         type="radio"
-//         name="radio"
-//         value="glass"
-//         checked={select === "glass"}
-//         onChange={event => handleSelectChange(event)}
-//         />
-//       <RadioButtonLabel />
-//       <div>Med glass</div>
-//     </Item>
-//     <Item active={select === "tradisjonell"}>
-//       <RadioButton
-//         type="radio"
-//         name="radio"
-//         value="tradisjonell"
-//         checked={select === "tradisjonell"}
-//         onChange={event => handleSelectChange(event)}
-//         />
-//       <RadioButtonLabel />
-//       <div>Tradisjonell</div>
-//     </Item>
-//     <Item active={select === "moderne"}>
-//       <RadioButton
-//         type="radio"
-//         name="radio"
-//         value="moderne"
-//         checked={select === "moderne"}
-//         onChange={event => handleSelectChange(event)}
-//         />
-//       <RadioButtonLabel />
-//       <div>Moderne</div>
-//     </Item>
-//   </Wrapper>
-// );
-//};
 
 export { MultiselectCheckbox };

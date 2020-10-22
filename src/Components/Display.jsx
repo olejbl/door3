@@ -147,7 +147,7 @@ const TransformedDoor = ({ doorHook }) => {
       setTransformationMatrix(DEFAULT_MATRIX);
       setReset(0); //change in the dependency [reset] triggers re-render of the component
     }
-    console.log(reset + "reset")
+    
   }, [selectedDoor, reset]);
 
   const handleCirleChoice = (index) => {

@@ -13,6 +13,8 @@ const ControlsWrapperSub = styled.div`
   z-index: 100;
   background-color:#E7E7E7;
   min-height: 100px;
+  margin-top: 10em;
+  margin-right: 1em;
 `;
 
 const DoorPicker = styled.div`
@@ -39,23 +41,6 @@ const SubDoorPicker = styled.div`
   background-color: #ECECEC;
 `;
 
-// const Button = styled.button `
-//   width: 160px ;
-//   height: 100px;
-//   background-color: #97262C;
-//   border-radius: 3px;
-//   color: white;
-//   font-family: Lato;
-//   font-size: 36px;
-//   font-style: normal;
-//   font-weight: 700;
-//   text-decoration: none;
-//   margin: auto;
-//   padding: 0.25em 1em;
-  
-// `
-
-
 const SingleDoor = styled.div`
   padding: 0.4em;
   transition: 0.2s;
@@ -73,6 +58,7 @@ const ImgUpload = styled.label`
   }
   border-radius: 5px;
   display: block;
+  font-weight: 700;
   width: 100px;
   height: 50px;
   margin: 30px auto;

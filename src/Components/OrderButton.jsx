@@ -16,6 +16,10 @@ const Button = styled.button `
   padding: 0.25em 1em;
 
 `
+const ButtonContainer = styled.div`
+  margin-top: 2em;
+  margin-bottom: 3em;
+`
 
 
 const OrderLink = ({doorHook}) => {
@@ -25,11 +29,11 @@ const OrderLink = ({doorHook}) => {
     <p> </p>
   );
   else return (
-    <div>
+    <ButtonContainer>
       <Button as="a" target="_blank" href={customLink + selectedDoor.public_id.split("/")[0]}>
           Bestill
       </Button>
-    </div>
+    </ButtonContainer>
   );
   
 }
