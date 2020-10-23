@@ -6,7 +6,7 @@ const ControlsWrapper = styled.div`
   z-index: 100;
   background-color: #e7e7e7;
   min-height: 300px;
-  max-height: 400px;
+  max-height: 370px;
   overflow-y: scroll;
 `;
 
@@ -20,6 +20,7 @@ const DoorPicker = styled.div`
   width: 95%;
   margin: auto;
   background-color: #ececec;
+  justify-content: center;
 `;
 
 const SingleDoor = styled.div`

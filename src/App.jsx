@@ -24,6 +24,7 @@ const Col = styled.div`
     flex: ${(props) => props.size};
 `;
 
+
 function App() {
     const doorHook = useDoor();
 

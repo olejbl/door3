@@ -10,21 +10,30 @@ const Wrapper = styled.div`
 `;
 
 const Item = styled.div`
-  display: flex;
-  align-items: center;
   height: 48px;
   position: relative;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  width: 90%;
+  //width: 100%; // 90
   border-radius: 2px;
   margin-bottom: 10px;
   background: white;
-  ${(props) =>
-    props.active &&
-    `
-    box-shadow: 0 0 10px -4px black;
-  `}
+`;
+
+const ItemWrapper = styled.div`
+  justify-content: center;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  padding: 0em;
+  width: 90%;
+  position: relative;
+`;
+const MappedItems = styled.div`
+  width: 50%;
+  &:first-child {
+        width: 100%;
+    }
 `;
 
 const RadioButtonLabel = styled.label`
@@ -36,39 +45,6 @@ const RadioButtonLabel = styled.label`
   border-radius: 50%;
   background: white;
   border: 1px solid #ccc;
-`;
-const RadioButton = styled.input`
-  opacity: 0;
-  z-index: 1;
-  cursor: pointer;
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
-  &:hover ~ ${RadioButtonLabel} {
-    background: #ccc;
-    &::after {
-      display: block;
-      color: white;
-      width: 12px;
-      height: 12px;
-      margin: 4px;
-    }
-  }
-  &:checked + ${Item} {
-    background: #2c9726;
-    border: 2px solid #2c9726;
-  }
-  &:checked + ${RadioButtonLabel} {
-    background: #2c9726;
-    border: 1px solid #2c9726;
-    &::after {
-      display: block;
-      color: white;
-      width: 12px;
-      height: 12px;
-      margin: 4px;
-    }
-  }
 `;
 
 const style = {
@@ -86,11 +62,11 @@ const style = {
 const MultiselectCheckbox = ({ doorHook }) => {
   const { setMainDoors } = doorHook;
   const [data, setData] = React.useState([
-    { label: "Vis alle", prop: "main", checked: true },                     // data[0]
-    { label: "Tradisjonell", prop: "tradisjonell", checked: false },     // data[3]
-    { label: "Moderne", prop: "moderne", checked: false },               // data[4]
-    { label: "Med glass", prop: "glass", checked: false },               // data[1]
-    { label: "Uten glass", prop: "uglass", checked: false },             // data[2]
+    { label: "Vis alle", prop: "main", checked: true},                     // data[0]
+    { label: "Tradisjonell", prop: "tradisjonell", checked: false},     // data[3]
+    { label: "Moderne", prop: "moderne", checked: false},               // data[4]
+    { label: "Med glass", prop: "glass", checked: false},               // data[1]
+    { label: "Uten glass", prop: "uglass", checked: false},             // data[2]
   ]);
 
   React.useEffect(() => {
@@ -184,22 +160,24 @@ const MultiselectCheckbox = ({ doorHook }) => {
   };
 
   return (
-    <ul style={style.listContainer}>
+    <ItemWrapper id="wrapper">
       {data.map((item, index) => {
         return (
-          <div>
+          <MappedItems id="mappedItems" >
             <Item
               key={item.label}
-              style={item.checked ? {backgroundColor: '#E5F2E4'} : {backgroundColor: '#F2E4E5'}}
+              style={
+                item.checked ? {backgroundColor: '#E5F2E4'} : {backgroundColor: '#F2E4E5'}
+              }
               onClick={() => handleClick(index)}
               >
               <input readOnly type="checkbox" checked={item.checked} className="visually-hidden"/>
               {item.label}
             </Item>
-          </div>
+          </MappedItems>
         );
       })}
-    </ul>
+    </ItemWrapper>
   );
 };
 

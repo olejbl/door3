@@ -39,6 +39,7 @@ const SubDoorPicker = styled.div`
   width: 15vw;
   margin: auto;
   background-color: #ECECEC;
+  justify-content: center;
 `;
 
 const SingleDoor = styled.div`
