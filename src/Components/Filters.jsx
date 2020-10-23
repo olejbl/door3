@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `;
 
 const Item = styled.div`
-  height: 48px;
+  height: 38px;
   position: relative;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -18,6 +18,7 @@ const Item = styled.div`
   border-radius: 2px;
   margin-bottom: 10px;
   background: white;
+  vertical-align: middle;
 `;
 
 const ItemWrapper = styled.div`
@@ -26,11 +27,12 @@ const ItemWrapper = styled.div`
   flex-direction: row-reverse;
   flex-wrap: wrap;
   padding: 0em;
-  width: 90%;
+  width: 95%;
   position: relative;
 `;
 const MappedItems = styled.div`
-  width: 50%;
+  padding-left: 2px;
+  width: 48%;
   &:first-child {
         width: 100%;
     }
