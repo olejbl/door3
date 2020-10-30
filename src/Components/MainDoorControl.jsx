@@ -8,6 +8,9 @@ const ControlsWrapper = styled.div`
   min-height: 300px;
   max-height: 370px;
   overflow-y: scroll;
+  min-width: 900px;
+  position: relative;
+  margin-bottom: 2em
 `;
 
 const DoorPicker = styled.div`

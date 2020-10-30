@@ -3,6 +3,7 @@ import './App.css';
 import {Controls, ImageUploader} from "./Components/Controls";
 import {MainDoorControl} from "./Components/MainDoorControl";
 import {MultiselectCheckbox} from "./Components/Filters";
+import {RedactionalViewer} from "./Components/Redactional";
 import {Display} from "./Components/Display";
 import {useDoor} from "./Components/hooks";
 import {OrderLink} from "./Components/OrderButton"
@@ -40,29 +41,31 @@ function App() {
                     <Col size={1}>
                         <ImageUploader doorHook={doorHook}/>
                     </Col>
-                    <Col size={3}>
-                    <h3>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </h3>
-                    <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
-                    <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har?  
-                        Mål opp og teip slik at det blir lettere å posisjonere døren riktig. Ønsker du en spesialfarge, kan du velge det i nettbutikken.</p>
+                    <Col size={5}>
+                        <h1> Her kan det stå redaksjonell tekst</h1>
                     </Col>
+                </Row>
+                <Row>
+                    <p></p>
                 </Row>
                 <Row>
                     <Col size={1}>
                         <MultiselectCheckbox doorHook={doorHook}/>
                     </Col>
-                    <Col size={3}>
+                    <Col size={5}>
                         <MainDoorControl doorHook={doorHook}/>
                     </Col>
                 </Row>
                 <Row>
-                <Col size={1}>
+                    <Col size={1}>
                         <Controls doorHook={doorHook}/>
-                        <p></p>
-                        <OrderLink doorHook={doorHook}/>
                     </Col>
-                    <Col size={3}>
+                    <Col size={4}>
                         <Display doorHook={doorHook}/>
+                    </Col>
+                    <Col size={1}>
+                        <RedactionalViewer doorHook={doorHook}/>
+                        <OrderLink doorHook={doorHook}/>
                     </Col>
                 </Row>
             </Grid>

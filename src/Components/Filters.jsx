@@ -9,6 +9,14 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
+const ItemWrapper = styled.div`
+  justify-content: center;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-right: 1em;
+`;
 const Item = styled.div`
   height: 38px;
   position: relative;
@@ -21,18 +29,10 @@ const Item = styled.div`
   vertical-align: middle;
 `;
 
-const ItemWrapper = styled.div`
-  justify-content: center;
-  display: flex;
-  flex-direction: row-reverse;
-  flex-wrap: wrap;
-  padding: 0em;
-  width: 95%;
-  position: relative;
-`;
 const MappedItems = styled.div`
   padding-left: 2px;
   width: 48%;
+  min-width: 105px;
   &:first-child {
         width: 100%;
     }

@@ -13,8 +13,9 @@ const ControlsWrapperSub = styled.div`
   z-index: 100;
   background-color:#E7E7E7;
   min-height: 100px;
-  margin-top: 10em;
+  margin-top: 0em;
   margin-right: 1em;
+  width: 100%;
 `;
 
 const DoorPicker = styled.div`
@@ -36,7 +37,6 @@ const SubDoorPicker = styled.div`
   overflow-x: hidden;
   overflow-y:hidden;
   padding: 0em;
-  width: 15vw;
   margin: auto;
   background-color: #ECECEC;
   justify-content: center;
@@ -51,7 +51,38 @@ const SingleDoor = styled.div`
 `;
 
 const ImgUpload = styled.label`
-  padding: 1em;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  border-spacing: 0;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  margin: 0;
+  font: inherit;
+  overflow: visible;
+  text-transform: none;
+  font-family: inherit;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  transition: all ease 250ms;
+  letter-spacing: 1px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+  background-color: #97262C;
+  border-color: #97262C;
+  color: #fff;
+  font-weight: 600;
+  line-height: 37px;
+  border-radius: 4px;
+  width: 60%;
+  /* padding: 1em;
   border: 0.1em  #97262C dashed;
   background-color: #97262C;
   &:hover {
@@ -59,12 +90,14 @@ const ImgUpload = styled.label`
   }
   border-radius: 5px;
   display: block;
-  font-weight: 700;
+  font-weight: bold;
+  letter-spacing: 1px;
   width: 100px;
   height: 50px;
   margin: 30px auto;
+  transition: all ease 250ms;
   color: white;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15);; */
 `;
 
 
@@ -81,7 +114,13 @@ const ImageUploader = ({ doorHook }) => {
     //consider using e_improve:[mode]:[blend] - mode: `outdoor` with cloudinary
   }
   return (
-    <div>
+    <div style={{backgroundColor: '#ECECEC', width:'400px'}}>
+      <div style={{padding: '1em'}}>
+      <b>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </b>
+      <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
+      <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har?  
+      Mål opp og teip slik at det blir lettere å posisjonere døren riktig. Ønsker du en spesialfarge, kan du velge det i nettbutikken.</p>
+      </div>
     <ImgUpload htmlFor="inpImage">
       <span> Last opp </span>
       <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '40px', margin: 'auto', display:'block'}} />

@@ -5,10 +5,6 @@ import { solve } from '../scripts/numeric-solve';
 import {CloudinaryContext, Image} from 'cloudinary-react';
 import * as d3 from 'd3';
 
-// const DisplayWrapper = styled.div` 
-
-// `;
-
 const Display = ({ doorHook }) => {
   const { selectedDoor, background } = doorHook;
   
@@ -147,7 +143,6 @@ const TransformedDoor = ({ doorHook }) => {
       setTransformationMatrix(DEFAULT_MATRIX);
       setReset(0); //change in the dependency [reset] triggers re-render of the component
     }
-    
   }, [selectedDoor, reset]);
 
   const handleCirleChoice = (index) => {
@@ -175,7 +170,7 @@ const TransformedDoor = ({ doorHook }) => {
     });
   }
 
-  const handleMouseMove = (evt) => {  
+  const handleMouseMove = (evt) => {
     if (evt.target.localName === 'svg') {
       const offset = evt.target.getBoundingClientRect();
       const x = evt.clientX - offset.left - doorOffset.x; 
@@ -211,7 +206,7 @@ const TransformedDoor = ({ doorHook }) => {
     }  
   }
 
-  const handleTouchMove = (evt) => {  
+  const handleTouchMove = (evt) => {
     if (evt.target.localName === 'circle') {
       const bodyRect = document.querySelector("#root > div > div:nth-child(2) > div > div > svg > g").getBoundingClientRect();
       const x = evt.changedTouches[0].clientX - bodyRect.left;  // touch
@@ -309,28 +304,21 @@ const TransformedDoor = ({ doorHook }) => {
     
   );
 };
-const WordFormatter = (word) => {
-  let result = word.split("/")[0]; // splits string on first "/""
-  result = result.replace(/_/g, " "); // replaces "_" with whitespace
-  result = result.split(' '); // split into array 
-  result[0] = result[0].replace(/./,x=>x.toUpperCase()); //sets first letter of first word to uppercase
-  result[1] = result[1].replace(/./,x=>x.toUpperCase()); //sets first letter of second word to uppercase
-  result = Array.prototype.join.call(result, " "); //joins the pseudo-array
-  return result;
-}
+// const WordFormatter = (word) => {
+//   let result = word.split("/")[0]; // splits string on first "/""
+//   result = result.replace(/_/g, " "); // replaces "_" with whitespace
+//   result = result.split(' '); // split into array 
+//   result[0] = result[0].replace(/./,x=>x.toUpperCase()); //sets first letter of first word to uppercase
+//   result[1] = result[1].replace(/./,x=>x.toUpperCase()); //sets first letter of second word to uppercase
+//   result = Array.prototype.join.call(result, " "); //joins the pseudo-array
+//   return result;
+// }
 
 
 const DoorPreviewer = ({doorHook}) => {
   const {background, selectedDoor} = doorHook;
-
-  
-  
-
   return (
-    <div>
-      <p> For å flytte på eksempeldøren, trykk på den nye døren og dra hvert hjørne over den gamle døren.</p>
-      <p> For å vende om døren slik at du får dørhåndtaket på den andre siden, dra de to sirklene til venstre over til høyre side.</p>
-      <p id="selectedDoorFormatted"> Du har valgt:  <b> {WordFormatter((selectedDoor.public_id))}</b> </p>
+    <div id='transformBakgrunn' style={{backgroundColor: '#CECECE'}}>
       <DoorPreviewBackground bg={background}>
         <TransformedDoor doorHook={doorHook}/>
       </DoorPreviewBackground>
