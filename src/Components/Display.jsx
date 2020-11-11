@@ -166,8 +166,8 @@ const TransformedDoor = ({ doorHook }) => {
         0,    0, 1,    0,
       X[2], X[5], 0,    1
     ].map(function(x) {
-      return parseFloat(d3.format(".9f")(x).replace('−', '-'));
-    });
+      return parseFloat(d3.format(".20f")(x).replace('−', '-')); // debug here
+    })
   }
 
   const handleMouseMove = (evt) => {

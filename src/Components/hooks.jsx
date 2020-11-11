@@ -10,7 +10,7 @@ const useDoor = () => {
   const [doors, setDoors] = useState([]);
   const [selectedDoor, setSelectedDoor] = useState({"public_id":"swedoor_debussy/Classic_Debussy_NCS_S_4050-Y80R_decor_1_prdggo","version":1601469857,"format":"jpg","width":713,"height":1500,"type":"upload","created_at":"2020-09-30T12:44:17Z"});
   const [loading, setLoading] = useState(false);
-  const [background, setBackground] = useState("https://res.cloudinary.com/dikc1xnkv/image/upload/eksempelbilde.jpg");
+  const [background, setBackground] = useState("https://res.cloudinary.com/dikc1xnkv/image/upload/v1604059183/eksempelbilde_fndqha.jpg");
 
   useEffect(() => {
     const fetchDoors = async () => {
