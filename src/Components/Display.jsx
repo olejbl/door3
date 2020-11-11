@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 // import { useDoor } from "./hooks";
 import { solve } from '../scripts/numeric-solve';
 import {CloudinaryContext, Image} from 'cloudinary-react';
 import * as d3 from 'd3';
+import Draggable from './Draggable';
 
 const Display = ({ doorHook }) => {
   const { selectedDoor, background } = doorHook;
@@ -71,7 +72,6 @@ const DoorPreviewWrapper = styled.div`
   overflow: hidden;
   width: 100%;
   height: 100%;
-  position: absolute;
   touch-action: none;
 `;
 const ImageWrapper = styled.div`
@@ -106,6 +106,25 @@ const ResetButton = styled.button `
   user-select: none; /* Standard syntax */
 `
 
+const calculateMatrix = (from, to) => {
+  for (var a = [], b = [], i = 0, n = from.length; i < n; ++i) {
+    var s = from[i], t = to[i];
+    a.push([s[0], s[1], 1, 0, 0, 0, -s[0] * t[0], -s[1] * t[0]]);
+    b.push(t[0]);
+    a.push([0, 0, 0, s[0], s[1], 1, -s[0] * t[1], -s[1] * t[1]]);
+    b.push(t[1]);
+  }
+
+  var X = solve(a, b, true);
+  return [
+    X[0], X[3], 0, X[6],
+    X[1], X[4], 0, X[7],
+      0,    0, 1,    0,
+    X[2], X[5], 0,    1
+  ].map(function(x) {
+    return parseFloat(d3.format(".9f")(x).replace('−', '-'));
+  });
+}
 
 const TransformedDoor = ({ doorHook }) => {
   const { selectedDoor } = doorHook;
@@ -114,194 +133,100 @@ const TransformedDoor = ({ doorHook }) => {
   const [ reset, setReset ] = useState(0);
 
   const DEFAULT_MATRIX = [1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0];
-  const [ transformationMatrix, setTransformationMatrix] = useState(DEFAULT_MATRIX);
-  const [ doorOffset, setDoorOffset ] = useState({x: 300,y: 200});
-  const [ mouseState, setMouseState ] = useState({targetCircle: -1});  //keeps track of which corner should move
-  const [ corners, setCorners ] = useState(
-    {
-     0: {x: 0, y: 0},
-     1: {x: doorWidth, y: 0},
-     2: {x: doorWidth, y: doorHeight},
-     3: {x: 0, y: doorHeight},
-    }
-  );
+  const [ doorOffset, setDoorOffset ] = useState({x: 300, y: 200});
+
+  const [cornerOne, setCornerOne] = useState({x: 0, y: 0, isDragging: false});
+  const [cornerTwo, setCornerTwo] = useState({x: 0, y: 0, isDragging: false});
+  const [cornerThree, setCornerThree] = useState({x: 0, y: 0, isDragging: false});
+  const [cornerFour, setCornerFour] = useState({x: 0, y: 0, isDragging: false});
+
+  const corners = [
+    {corner: cornerOne, setCorner: setCornerOne},
+    {corner: cornerTwo, setCorner: setCornerTwo},
+    {corner: cornerThree, setCorner: setCornerThree},
+    {corner: cornerFour, setCorner: setCornerFour},
+  ];
 
   useEffect(() => {
     const { width, height } = selectedDoor;
     const scaler = 200 / Math.max(width, height);
+
     const w = width * scaler;
     const h = height * scaler;
-    if (w !== doorWidth || h !== doorHeight || reset !== 0) {
-      setDoorWidth(w);
-      setDoorHeight(h);
-      setCorners({
-        0: {x: 0, y: 0},
-        1: {x: w, y: 0},
-        2: {x: w, y: h},
-        3: {x: 0, y: h},
-      });
-      setTransformationMatrix(DEFAULT_MATRIX);
-      setReset(0); //change in the dependency [reset] triggers re-render of the component
-    }
+
+    setDoorWidth(w);
+    setDoorHeight(h);
+
+    setCornerOne({x: doorOffset.x, y: doorOffset.y, isDragging: false});
+    setCornerTwo({x: doorOffset.x + w, y: doorOffset.y, isDragging: false});
+    setCornerThree({x: doorOffset.x + w, y: doorOffset.y + h, isDragging: false});
+    setCornerFour({x: doorOffset.x, y: doorOffset.y + h, isDragging: false});
+
+    setReset(0); //change in the dependency [reset] triggers re-render of the component
   }, [selectedDoor, reset]);
 
-  const handleCirleChoice = (index) => {
-    console.log(index);
-    setMouseState({...mouseState, targetCircle: index}); 
-  };
+  const doorCorners = [
+    [0, 0],
+    [doorWidth, 0],
+    [doorWidth, doorHeight],
+    [0, doorHeight]
+  ];
 
-  const getMatrix = (from, to) => {
-    for (var a = [], b = [], i = 0, n = from.length; i < n; ++i) {
-      var s = from[i], t = to[i];
-      a.push([s[0], s[1], 1, 0, 0, 0, -s[0] * t[0], -s[1] * t[0]]);
-      b.push(t[0]);
-      a.push([0, 0, 0, s[0], s[1], 1, -s[0] * t[1], -s[1] * t[1]]);
-      b.push(t[1]);
-    }
+  const circleCorners = [
+    [cornerOne.x, cornerOne.y],
+    [cornerTwo.x, cornerTwo.y],
+    [cornerThree.x, cornerThree.y],
+    [cornerFour.x, cornerFour.y],
+  ];
 
-    var X = solve(a, b, true);
-    return [
-      X[0], X[3], 0, X[6],
-      X[1], X[4], 0, X[7],
-        0,    0, 1,    0,
-      X[2], X[5], 0,    1
-    ].map(function(x) {
-      return parseFloat(d3.format(".9f")(x).replace('−', '-'));
-    });
-  }
-
-  const handleMouseMove = (evt) => {
-    if (evt.target.localName === 'svg') {
-      const offset = evt.target.getBoundingClientRect();
-      const x = evt.clientX - offset.left - doorOffset.x; 
-      const y = evt.clientY - offset.top - doorOffset.y; 
-      if (mouseState.targetCircle >= 0) {
-        if (mouseState === 4) {
-          console.log('Moving door');
-          setDoorOffset(
-            {x: doorOffset.x + x},
-            {y: doorOffset.y + y},
-          )
-        } else {
-          setCorners({
-            ...corners,
-            [mouseState.targetCircle]: {x, y}  
-          });
-          const doorCorners = [
-            [0, 0],
-            [doorWidth, 0],
-            [doorWidth,doorHeight],
-            [0, doorHeight]
-          ]
-    
-          const circleCorners = Object.values(corners)
-            .map(({x, y}) => [x, y]);
-          
-          setTransformationMatrix(
-            getMatrix(doorCorners, circleCorners)
-          );
-        }
-      }
-      
-    }  
-  }
-
-  const handleTouchMove = (evt) => {
-    if (evt.target.localName === 'circle') {
-      const bodyRect = document.querySelector("#root > div > div:nth-child(2) > div > div > svg > g").getBoundingClientRect();
-      const x = evt.changedTouches[0].clientX - bodyRect.left;  // touch
-      const y = evt.changedTouches[0].clientY - bodyRect.top;  // touch
-      console.log(evt.changedTouches[0].clientX);
-      if (mouseState.targetCircle >= 0) {
-        if (mouseState === 4) {
-          console.log('Moving door'); //not working 
-        } else {
-          setCorners({
-            ...corners,
-            [mouseState.targetCircle]: {x, y}  //todo touch
-          });
-          const doorCorners = [
-            [0, 0],
-            [doorWidth, 0],
-            [doorWidth,doorHeight],
-            [0, doorHeight]
-          ]
-    
-          const circleCorners = Object.values(corners)
-            .map(({x, y}) => [x, y]);
-          setTransformationMatrix(
-            getMatrix(doorCorners, circleCorners)
-          );
-        }
-      }
-      
-    }  
-  }
-
-  const handleMouseUp = (evt) => {
-    setMouseState({...mouseState, targetCircle: -1});
-  };
-  const handleTouchEnd = (evt) => {
-    setMouseState({...mouseState, targetCircle: -1});
-    console.log("Touch ended") 
-  }
+  const transformationMatrix = calculateMatrix(doorCorners, circleCorners) || DEFAULT_MATRIX;
 
   return (
-    <DoorPreviewWrapper onMouseUp={handleMouseUp} onTouchEnd={handleTouchEnd} width="900px" height="500px">
+    <DoorPreviewWrapper width="900px" height="500px">
       <ResetButton id="resetButton"
         onClick={() => {
           setReset(prev => prev + Math.random());
-        }}
-      > Tilbakestill </ResetButton>
-      <CloudinaryContext cloudName="dikc1xnkv">
-        <ImageWrapper  
+        }}>
+        Tilbakestill
+      </ResetButton>
+      
+        <ImageWrapper
           style={{
+            backgroundColor: 'rgba(255,0,0,0.5)',
             transformOrigin: `${doorOffset.x}px ${doorOffset.y}px`,
             transform: `matrix3d(${transformationMatrix.toString()})`
-          }} >
+          }}>
+            <CloudinaryContext cloudName="dikc1xnkv">
+              
           <Image style={{
-            transform: `translate(${-doorWidth}px, ${doorHeight}px)`, 
+            transform: `translate(${doorWidth}px, ${doorHeight}px)`, 
             width: doorWidth+'px', 
             height: doorHeight+'px',
           }}
-           publicId={selectedDoor.public_id} width={doorWidth} height={doorHeight} q="100" loading="lazy" />
+          publicId={selectedDoor.public_id} width={doorWidth} height={doorHeight} q="100" loading="lazy" />
+          </CloudinaryContext>
         </ImageWrapper>
-      </CloudinaryContext>
-      <CircleWrapper viewBox='0 0 900 500' onMouseMove={handleMouseMove} onTouchMove={handleTouchMove} >
-        <g transform={`translate(${doorOffset.x}, ${doorOffset.y})`}>
-          <circle
-            className="handle"
-            onMouseDown={() => handleCirleChoice(0)}
-            onTouchStart={() => handleCirleChoice(0)}
-            transform={`translate(${corners[0].x-5}, ${corners[0].y-15})`} 
-            r="7"
-          />
-          <circle
-            className="handle"
-            onMouseDown={() => handleCirleChoice(1)}
-            onTouchStart={() => handleCirleChoice(1)}
-            transform={`translate(${corners[1].x+10}, ${corners[1].y-15})`} 
-            r="7"
-            
-          />
-          <circle
-            className="handle"
-            onMouseDown={() => handleCirleChoice(2)}
-            onTouchStart={() => handleCirleChoice(2)}
-            transform={`translate(${corners[2].x+5}, ${corners[2].y+5})`} 
-            r="7"
-          />
-          <circle
-            className="handle"
-            onMouseDown={() => handleCirleChoice(3)}
-            onTouchStart={() => handleCirleChoice(3)}
-            transform={`translate(${corners[3].x-5}, ${corners[3].y+5})`} 
-            r="7"
-          />
-        </g>
+      <CircleWrapper viewBox='0 0 900 500'>
+      <g transform={`translate(${doorOffset.x}, ${doorOffset.y})`}>
+         {
+           corners.map(({corner, setCorner}) => {
+             return (
+              <Draggable x={corner.x} y={corner.y} onPositionChange={setCorner}>
+                {({ x, y, isDragging, handleMouseDown}) => (
+                  <circle
+                    className="handle"
+                    onMouseDown={handleMouseDown}
+                    transform={`translate(${x}, ${y})`}
+                    r="7"
+                  />
+                )}
+              </Draggable> 
+             )
+           })
+         }
+         </g>
       </CircleWrapper>
     </DoorPreviewWrapper>
-    
   );
 };
 // const WordFormatter = (word) => {
