@@ -6,7 +6,8 @@ import {MultiselectCheckbox} from "./Components/Filters";
 import {RedactionalViewer} from "./Components/Redactional";
 import {Display} from "./Components/Display";
 import {useDoor} from "./Components/hooks";
-import {OrderLink} from "./Components/OrderButton"
+import {OrderLink} from "./Components/OrderButton";
+import {BackgroundSelector} from "./Components/BackgroundSelector";
 import styled from 'styled-components';
 import ReactGA from "react-ga";  //Google Analytics
 
@@ -66,6 +67,11 @@ function App() {
                     <Col size={1}>
                         <RedactionalViewer doorHook={doorHook}/>
                         <OrderLink doorHook={doorHook}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col size={1}>
+                        <BackgroundSelector doorHook={doorHook}/>
                     </Col>
                 </Row>
             </Grid>
