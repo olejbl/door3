@@ -24,6 +24,7 @@ const Row = styled.div`
 `;
 const Col = styled.div`
     flex: ${(props) => props.size};
+    padding-right: 1em;
 `;
 
 
@@ -38,41 +39,42 @@ function App() {
     return (
         <AppWrapper className="App">
             <Grid>
-                <Row>
+                {/* <Row>
                     <Col size={1}>
                         <ImageUploader doorHook={doorHook}/>
                     </Col>
                     <Col size={5}>
                         <h1> Her kan det stå redaksjonell tekst</h1>
                     </Col>
-                </Row>
-                <Row>
+                </Row> */}
+                {/* <Row>
                     <p></p>
-                </Row>
+                </Row> */}
                 <Row>
                     <Col size={1}>
+                        <ImageUploader doorHook={doorHook}/>
                         <MultiselectCheckbox doorHook={doorHook}/>
-                    </Col>
-                    <Col size={5}>
-                        <MainDoorControl doorHook={doorHook}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col size={1}>
                         <Controls doorHook={doorHook}/>
-                    </Col>
-                    <Col size={4}>
-                        <Display doorHook={doorHook}/>
-                    </Col>
-                    <Col size={1}>
                         <RedactionalViewer doorHook={doorHook}/>
                         <OrderLink doorHook={doorHook}/>
                     </Col>
+                    <Col size={5}>
+                        <MainDoorControl doorHook={doorHook}/>
+                        <Display doorHook={doorHook}/>
+                        <BackgroundSelector doorHook={doorHook}/>
+                    </Col>
                 </Row>
                 <Row>
                     <Col size={1}>
-                        <BackgroundSelector doorHook={doorHook}/>
+                       
                     </Col>
+                    <Col size={5}>
+                        
+                    </Col>
+                    {/* <Col size={1}>
+                        <RedactionalViewer doorHook={doorHook}/>
+                        <OrderLink doorHook={doorHook}/>
+                    </Col> */}
                 </Row>
             </Grid>
         </AppWrapper>

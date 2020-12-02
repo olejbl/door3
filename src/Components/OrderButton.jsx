@@ -26,13 +26,13 @@ const Button = styled.button `
   transition: all ease 250ms;
   letter-spacing: 1px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-  background-color: #18aa53;
-  border-color: #18aa53;
+  background-color: #058400;
+  border-color: #058400;
   color: #fff;
   font-weight: 600;
   line-height: 37px;
-  border-radius: 4px;
-  width: unset;
+  border-radius: 0px;
+  width: 90%;
   text-decoration: none;
   &:hover {
     background-color: #148c44;

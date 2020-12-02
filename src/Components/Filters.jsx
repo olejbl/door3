@@ -30,12 +30,13 @@ const Item = styled.div`
 `;
 
 const MappedItems = styled.div`
-  padding-left: 2px;
+  width: 100%;
+  /* padding-left: 2px;
   width: 48%;
   min-width: 105px;
   &:first-child {
         width: 100%;
-    }
+    } */
 `;
 
 const RadioButtonLabel = styled.label`
@@ -56,7 +57,7 @@ const style = {
   },
   itemStyle: {
     cursor: "pointer",
-    padding: 5,
+    padding: 0,
   },
 };
 

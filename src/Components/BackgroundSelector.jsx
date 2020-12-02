@@ -2,10 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const BackgroundImages = styled.div`
-
   & img {
-    width: 100px;
-    height: 100px;
+    width: 10em;
+    height: 10em;
     object-fit: cover;
   }
 `;

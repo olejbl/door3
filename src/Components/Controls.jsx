@@ -6,16 +6,17 @@ import cameraFilled from '@iconify/icons-ant-design/camera-filled';
 
 const ControlsWrapper = styled.div`
   z-index: 100;
-  background-color:#E7E7E7;
+  background-color:#ffffff;
   min-height: 300px;
 `;
 const ControlsWrapperSub = styled.div`
   z-index: 100;
-  background-color:#E7E7E7;
+  background-color:#ffffff;
   min-height: 100px;
   margin-top: 0em;
   margin-right: 1em;
   width: 100%;
+  text-align: left;
 `;
 
 const DoorPicker = styled.div`
@@ -38,8 +39,8 @@ const SubDoorPicker = styled.div`
   overflow-y:hidden;
   padding: 0em;
   margin: auto;
-  background-color: #ECECEC;
-  justify-content: center;
+  background-color: #ffffff;
+  justify-content: left;
 `;
 
 const SingleDoor = styled.div`
@@ -48,6 +49,10 @@ const SingleDoor = styled.div`
   &:hover {
     transform: scale(1.05);
   }
+`;
+
+const UploaderWrapper = styled.div`
+  text-align: left;
 `;
 
 const ImgUpload = styled.label`
@@ -60,12 +65,13 @@ const ImgUpload = styled.label`
   overflow: visible;
   text-transform: none;
   font-family: inherit;
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
   text-align: center;
-  white-space: nowrap;
   vertical-align: middle;
   touch-action: manipulation;
   cursor: pointer;
@@ -75,29 +81,18 @@ const ImgUpload = styled.label`
   transition: all ease 250ms;
   letter-spacing: 1px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-  background-color: #97262C;
-  border-color: #97262C;
+  background-color: #058400;
+  border-color: #058400;
   color: #fff;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 37px;
-  border-radius: 4px;
-  width: 60%;
-  /* padding: 1em;
-  border: 0.1em  #97262C dashed;
-  background-color: #97262C;
+  border-radius: 0px;
+  width: 100%;
+  text-decoration: none;
   &:hover {
-    transform: scale(1.05);
+    background-color: #148c44;
+    border-color: #148c44;
   }
-  border-radius: 5px;
-  display: block;
-  font-weight: bold;
-  letter-spacing: 1px;
-  width: 100px;
-  height: 50px;
-  margin: 30px auto;
-  transition: all ease 250ms;
-  color: white;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.15);; */
 `;
 
 
@@ -114,19 +109,16 @@ const ImageUploader = ({ doorHook }) => {
     //consider using e_improve:[mode]:[blend] - mode: `outdoor` with cloudinary
   }
   return (
-    <div style={{backgroundColor: '#ECECEC', width:'400px'}}>
-      <div style={{padding: '1em'}}>
-      <b>Last opp et bilde av ditt inngangsparti ved å klikke på kameraet </b>
+    <UploaderWrapper>
+      <h4>Legg inn eget bilde </h4>
+      <ImgUpload htmlFor="inpImage">
+        <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '30px', margin: 'auto', display:'block'}}/>
+        <span> Last opp ditt bilde</span>
+        <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
+      </ImgUpload>
       <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
-      <p> Tips: Skal du ha en annen størrelse på døren enn det du allerede har?  
-      Mål opp og teip slik at det blir lettere å posisjonere døren riktig. Ønsker du en spesialfarge, kan du velge det i nettbutikken.</p>
-      </div>
-    <ImgUpload htmlFor="inpImage">
-      <span> Last opp </span>
-      <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '40px', margin: 'auto', display:'block'}} />
-      <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
-    </ImgUpload>
-  </div>
+      <h4>Velg type</h4> 
+    </UploaderWrapper>
   )
 };
 
@@ -142,7 +134,7 @@ const Controls = ({ doorHook }) => {
     <ControlsWrapperSub>
       
       <div>
-        <b>Velg farge.  </b>
+        <h4>Velg farge  </h4>
       </div>
       { loading ? (
         <p>Laster inn dører ...</p>

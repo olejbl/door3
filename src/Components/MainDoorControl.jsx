@@ -4,13 +4,13 @@ import { CloudinaryContext, Image } from "cloudinary-react";
 
 const ControlsWrapper = styled.div`
   z-index: 100;
-  background-color: #e7e7e7;
+  background-color: #ececec;
   min-height: 300px;
-  max-height: 370px;
+  /* max-height: 370px; */
   overflow-y: scroll;
   min-width: 900px;
   position: relative;
-  margin-bottom: 2em
+  margin-bottom: 2em;
 `;
 
 const DoorPicker = styled.div`
@@ -62,7 +62,7 @@ const MainDoorControl = ({ doorHook }) => {
     <CloudinaryContext cloudName="dikc1xnkv">
       <ControlsWrapper>
         <div>
-          <b>Velg dørmodell, du kan velge farge senere. </b>
+          <b>Velg modell </b>
           {/* <div name="filters" id="filters" >
         <select name="inpProducers" id="inpProducers" onChange={""}>
           { mainDoorLists.map((main) => ( //TODO Filters here 
