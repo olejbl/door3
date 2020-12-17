@@ -52,7 +52,8 @@ const SingleDoor = styled.div`
 `;
 
 const UploaderWrapper = styled.div`
-  text-align: left;
+  text-align: center;
+  align-content: center;
 `;
 
 const ImgUpload = styled.label`
@@ -61,15 +62,13 @@ const ImgUpload = styled.label`
   border-collapse: collapse;
   box-sizing: border-box;
   margin: 0;
-  font: inherit;
   overflow: visible;
   text-transform: none;
-  font-family: inherit;
   display: flex;
-  flex-direction: row;
-  white-space: nowrap;
+  flex-direction: column;
+  white-space: wrap;
   padding: 6px 12px;
-  margin-bottom: 0;
+  margin-block-end: 0.5em;
   font-size: 14px;
   text-align: center;
   vertical-align: middle;
@@ -85,9 +84,8 @@ const ImgUpload = styled.label`
   border-color: #058400;
   color: #fff;
   font-weight: 400;
-  line-height: 37px;
   border-radius: 0px;
-  width: 100%;
+  width: 300px;
   text-decoration: none;
   &:hover {
     background-color: #148c44;
@@ -110,13 +108,13 @@ const ImageUploader = ({ doorHook }) => {
   }
   return (
     <UploaderWrapper>
-      <h4>Legg inn eget bilde </h4>
       <ImgUpload htmlFor="inpImage">
         <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '30px', margin: 'auto', display:'block'}}/>
-        <span> Last opp ditt bilde</span>
+        <span> </span>
+        <p style={{fontSize: '20px'}}>Klikk her for å laste opp eget bilde </p>
+        <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
         <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
       </ImgUpload>
-      <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
       <h4>Velg type</h4> 
     </UploaderWrapper>
   )
