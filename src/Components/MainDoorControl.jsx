@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { CloudinaryContext, Image } from "cloudinary-react";
 
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css'
+
 const ControlsWrapper = styled.div`
   z-index: 100;
   background-color: #ececec;
@@ -28,6 +31,7 @@ const DoorPicker = styled.div`
 
 const SingleDoor = styled.div`
   padding: 0.4em;
+  width: 150px;
   transition: 0.2s;
   &:hover {
     transform: scale(1.05);
@@ -58,20 +62,15 @@ const MainDoorControl = ({ doorHook }) => {
     setProducer(value);
   };
 
+  const handleDragStart = (e) => e.preventDefault();
+
   return (
     <CloudinaryContext cloudName="dikc1xnkv">
       <ControlsWrapper>
         <div>
           <b>Velg modell </b>
-          {/* <div name="filters" id="filters" >
-        <select name="inpProducers" id="inpProducers" onChange={""}>
-          { mainDoorLists.map((main) => ( //TODO Filters here 
-            <option key={main} value={main}>{main}</option>
-          ))}
-        </select>
-        </div> */}
         </div>
-        <DoorPicker>
+        {/* <DoorPicker>
           {mainDoors.map((door) => {
             if (true) {
               return (
@@ -80,7 +79,10 @@ const MainDoorControl = ({ doorHook }) => {
                   onClick={() => {
                     handleMainDoorChange(door); //selects the main door, then shows the rest of the corresponding doors
                   }}
+                  onDragStart={handleDragStart} 
                 >
+                
+                
                   <Image
                     publicId={door.public_id || door}
                     height="150"
@@ -94,7 +96,36 @@ const MainDoorControl = ({ doorHook }) => {
               );
             }
           })}
-        </DoorPicker>
+        </DoorPicker> */}
+        <AliceCarousel
+          mouseTrackings
+          style={{width: 150}}>
+          {mainDoors.map((door) => {
+            if (true) {
+              return (
+                <SingleDoor
+                  key={door.public_id || door}
+                  onClick={() => {
+                    handleMainDoorChange(door); //selects the main door, then shows the rest of the corresponding doors
+                  }}
+                  onDragStart={handleDragStart} 
+                >
+                
+                
+                  <Image
+                    publicId={door.public_id || door}
+                    height="150"
+                    width="75"
+                    dpr="auto"
+                    loading="lazy"
+                    quality="auto"
+                    controls
+                  />
+                </SingleDoor>
+              );
+            }
+          })}
+        </AliceCarousel>
       </ControlsWrapper>
     </CloudinaryContext>
   );

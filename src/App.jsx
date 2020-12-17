@@ -24,7 +24,7 @@ const Row = styled.div`
 `;
 const Col = styled.div`
     flex: ${(props) => props.size};
-    padding-right: 1em;
+    padding-right: 0em;
 `;
 
 

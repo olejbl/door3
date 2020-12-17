@@ -57,16 +57,6 @@ const DoorPreviewBackground = styled.div`
   }
 `;
 
-// const DraggableDoor = styled.svg`
-//   border: solid 0.1em lightblue;
-//   overflow: hidden;
-//   width: 100%;
-//   height: 100%;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-// `;
-
 const DoorPreviewWrapper = styled.div`
   overflow: hidden;
   width: 100%;
@@ -245,7 +235,7 @@ const TransformedDoor = ({ doorHook }) => {
     setMouseState({...mouseState, targetCircle: -1});
     console.log("Touch ended") 
   }
-
+  //TODO WIDTH HEIGHT
   return (
     <DoorPreviewWrapper onMouseUp={handleMouseUp} onTouchEnd={handleTouchEnd} width="900px" height="500px">
       <ResetButton id="resetButton"

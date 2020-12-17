@@ -7,6 +7,10 @@ const BackgroundImages = styled.div`
     height: 10em;
     object-fit: cover;
   }
+  /*This prevents the Copy, Paste, Select... menu from appearing on mobile*/
+  -webkit-user-select: none; /* Safari */ 
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
 `;
 
 const BackgroundSelector = ({doorHook}) => {
