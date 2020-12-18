@@ -4,43 +4,38 @@ import {CloudinaryContext, Image} from 'cloudinary-react';
 import { Icon } from '@iconify/react';
 import camera from '@iconify/icons-ant-design/camera';
 
+const Header = styled.div`
+  margin: 1rem 1rem 1rem 3.5rem;
+  font-weight: 500;
+`
+
+
 const ControlsWrapper = styled.div`
   z-index: 100;
   background-color:#ffffff;
   min-height: 300px;
 `;
 const ControlsWrapperSub = styled.div`
-  z-index: 100;
-  background-color:#ffffff;
-  min-height: 100px;
-  margin-top: 0em;
-  margin-right: 1em;
-  width: 100%;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
 `;
 
-const DoorPicker = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  overflow-x: scroll;
-  overflow-y:hidden;
-  padding: 0em;
-  width: 95%;
-  margin: auto;
-  background-color: #ECECEC;
-`;
+// const DoorPicker = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   overflow-x: scroll;
+//   overflow-y:hidden;
+//   padding: 0em;
+//   width: 95%;
+//   margin: auto;
+//   background-color: #ECECEC;
+// `;
 
 const SubDoorPicker = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  overflow-x: hidden;
-  overflow-y:hidden;
-  padding: 0em;
-  margin: auto;
-  background-color: #ffffff;
-  justify-content: left;
+  flex-flow: row wrap;
+  justify-content: center;
 `;
 
 const SingleDoor = styled.div`
@@ -129,9 +124,9 @@ const Controls = ({ doorHook }) => {
     <CloudinaryContext cloudName="dikc1xnkv">
     <ControlsWrapperSub>
       
-      <div>
-        <h4>Velg farger  </h4>
-      </div>
+      <Header>
+        Velg farger
+      </Header>
       { loading ? (
         <p>Laster inn dører ...</p>
       ) : (

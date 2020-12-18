@@ -17,7 +17,7 @@ const ItemWrapper = styled.div `
   justify-content: center;
   margin-left: 1rem;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   flex-wrap: wrap;
 `;
 const Item = styled.div `
