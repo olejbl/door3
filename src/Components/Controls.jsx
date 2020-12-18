@@ -130,7 +130,7 @@ const Controls = ({ doorHook }) => {
     <ControlsWrapperSub>
       
       <div>
-        <h4>Velg farge  </h4>
+        <h4>Velg farger  </h4>
       </div>
       { loading ? (
         <p>Laster inn dører ...</p>

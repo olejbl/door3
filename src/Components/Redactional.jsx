@@ -1,5 +1,8 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { Icon, InlineIcon } from '@iconify/react';
+import infoCircleFilled from '@iconify-icons/ant-design/info-circle-filled';
+
 
 const RedactionalWrapper = styled.div`
  margin: 1em;
@@ -18,7 +21,7 @@ const RedactionalViewer = ({doorHook}) => {
   const {selectedDoor} = doorHook;
   return(
     <RedactionalWrapper doorHook={doorHook}>
-      <p> Flytt hjørnene slik at de passer med bildet. For å vende om døren slik at du får dørhåndtaket på den andre siden, dra de to sirklene til venstre over til høyre side.</p>
+      <p> <Icon icon={infoCircleFilled} color="#97262C" height="2rem" /> Flytt hjørnene slik at de passer med bildet. For å vende om døren slik at du får dørhåndtaket på den andre siden, dra de to sirklene til venstre over til høyre side.</p>
       <p> <b>Tips:</b> Skal du ha en annen størrelse på døren enn det du allerede har?  
       Mål opp og teip slik at det blir lettere å posisjonere døren riktig. </p>
       <p>Ønsker du en spesialfarge, kan du velge det i nettbutikken.</p>

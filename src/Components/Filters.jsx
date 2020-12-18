@@ -2,42 +2,35 @@ import React from "react";
 import styled from "styled-components";
 import {getDoorsByProducer} from "../api";
 
+const Header = styled.div ` 
+  margin: 1rem 1rem 1rem 3.5rem;
+  font-weight: 500;
+`
+
 const Wrapper = styled.div `
-  height: auto;
-  width: 100%;
-  padding: 0px 16px 24px 16px;
-  box-sizing: border-box;
-  text-align: left;
+`;
+const FilterWrapper = styled.div `
+  background-color: rgb(245,245,245);
 `;
 
 const ItemWrapper = styled.div `
   justify-content: center;
+  margin-left: 1rem;
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
-  width: 100%;
-  margin-right: 1em;
 `;
 const Item = styled.div `
-  height: 38px;
-  position: relative;
-  border: 0px solid #ccc;
-  box-sizing: border-box;
-  //width: 100%; // 90
-  border-radius: 0px;
-  margin-bottom: 10px;
-  background: white;
-  vertical-align: left;
+  border-bottom: 1px solid lightgrey;
+  padding: 0.25rem;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 `;
 
 const MappedItems = styled.div `
   width: 100%;
-  /* padding-left: 2px;
-  width: 48%;
-  min-width: 105px;
-  &:first-child {
-        width: 100%;
-    } */
 `;
 
 const RadioButtonLabel = styled.label `
@@ -61,11 +54,6 @@ const style = {
     padding: 0
   }
 };
-
-const Header = styled.div` 
-  margin: 1rem 1rem 1rem 3.5rem;
-  font-weight: 500;
-`
 
 
 const MultiselectCheckbox = ({doorHook}) => {
@@ -236,38 +224,43 @@ const MultiselectCheckbox = ({doorHook}) => {
   };
 
   return (
-    <div>
+    <Wrapper>
       <Header>Velg type</Header>
-      <ItemWrapper id="wrapper">
-        {
-        data.map((item, index) => {
-          return (
-            <MappedItems id="mappedItems">
-              <Item key={
+      <FilterWrapper>
+        <ItemWrapper id="wrapper">
+          {
+          data.map((item, index) => {
+            return (
+              <MappedItems id="mappedItems">
+                <Item key={
+                    item.label
+                  }
+                  // style={
+                  //   item.checked ? {
+                  //     backgroundColor: '#E5F2E4'
+                  //   } : {
+                  //     backgroundColor: '#F2E4E5'
+                  //   }
+                  // }
+                  onClick={
+                    () => handleClick(index)
+                }>
+                  <input readOnly type="checkbox"
+                    checked={
+                      item.checked
+                    }
+                    style={
+                      {marginLeft: '2rem'}
+                    }
+                    className="visually-hidden"/> {
                   item.label
-                }
-                style={
-                  item.checked ? {
-                    backgroundColor: '#E5F2E4'
-                  } : {
-                    backgroundColor: '#F2E4E5'
-                  }
-                }
-                onClick={
-                  () => handleClick(index)
-              }>
-                <input readOnly type="checkbox"
-                  checked={
-                    item.checked
-                  }
-                  className="visually-hidden"/> {
-                item.label
-              } </Item>
-            </MappedItems>
-          );
-        })
-      } </ItemWrapper>
-    </div>
+                } </Item>
+              </MappedItems>
+            );
+          })
+        } </ItemWrapper>
+      </FilterWrapper>
+    </Wrapper>
   );
 };
 

@@ -95,6 +95,35 @@ const ResetButton = styled.button `
   -webkit-user-select: none; /* Safari */ 
   -ms-user-select: none; /* IE 10+ and Edge */
   user-select: none; /* Standard syntax */
+
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  box-sizing: border-box;
+  font: inherit;
+  overflow: visible;
+  text-transform: none;
+  font-size: 12px;
+  font-weight: 400;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border-radius: 0px;
+  border: none;
+  line-height: 30px;
+  color: #fff;
+  transition: all ease 250ms;
+  letter-spacing: 1px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+  margin: 0;
+  padding: 0 1.3em;
+  position: relative;
+  z-index: 1;
+  background-color: #97262C;
+
 `
 
 
