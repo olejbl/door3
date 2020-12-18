@@ -114,7 +114,6 @@ const ImageUploader = ({ doorHook }) => {
         <div style={{paddingBottom:'20px'}}>For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</div>
         <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
       </ImgUpload>
-      <h4>Velg type</h4> 
     </UploaderWrapper>
   )
 };

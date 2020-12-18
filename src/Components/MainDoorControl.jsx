@@ -34,6 +34,12 @@ const SingleDoor = styled.div`
   }
 `;
 
+const Header = styled.div`
+  margin: 1rem 1rem 1rem 1.5rem;
+  font-weight: 500;
+`;
+
+
 const MainDoorControl = ({ doorHook }) => {
   const {
     setProducer,
@@ -62,9 +68,9 @@ const MainDoorControl = ({ doorHook }) => {
   return (
     <CloudinaryContext cloudName="dikc1xnkv">
       <ControlsWrapper>
-        <div>
-          <b>Velg modell </b>
-        </div>
+        <Header>
+          Dørvelgeren: Velg modell
+        </Header>
         <DoorPicker>
           {mainDoors.map((door) => {
             if (true) {

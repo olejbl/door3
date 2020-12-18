@@ -58,6 +58,7 @@ const DoorPreviewBackground = styled.div`
 `;
 
 const DoorPreviewWrapper = styled.div`
+  text-align: center;
   overflow: hidden;
   width: 100%;
   height: 100%;

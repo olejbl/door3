@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { getDoorsByProducer } from "../api";
+import {getDoorsByProducer} from "../api";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div `
   height: auto;
   width: 100%;
   padding: 0px 16px 24px 16px;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   text-align: left;
 `;
 
-const ItemWrapper = styled.div`
+const ItemWrapper = styled.div `
   justify-content: center;
   display: flex;
   flex-direction: row-reverse;
@@ -18,7 +18,7 @@ const ItemWrapper = styled.div`
   width: 100%;
   margin-right: 1em;
 `;
-const Item = styled.div`
+const Item = styled.div `
   height: 38px;
   position: relative;
   border: 0px solid #ccc;
@@ -30,7 +30,7 @@ const Item = styled.div`
   vertical-align: left;
 `;
 
-const MappedItems = styled.div`
+const MappedItems = styled.div `
   width: 100%;
   /* padding-left: 2px;
   width: 48%;
@@ -40,7 +40,7 @@ const MappedItems = styled.div`
     } */
 `;
 
-const RadioButtonLabel = styled.label`
+const RadioButtonLabel = styled.label `
   position: absolute;
   top: 25%;
   left: 4px;
@@ -54,43 +54,65 @@ const RadioButtonLabel = styled.label`
 const style = {
   listContainer: {
     listStyle: "none",
-    paddingLeft: 0,
+    paddingLeft: 0
   },
   itemStyle: {
     cursor: "pointer",
-    padding: 0,
-  },
+    padding: 0
+  }
 };
 
+const Header = styled.div` 
+  margin: 1rem 1rem 1rem 3.5rem;
+  font-weight: 500;
+`
 
-const MultiselectCheckbox = ({ doorHook }) => {
-  const { setMainDoors } = doorHook;
+
+const MultiselectCheckbox = ({doorHook}) => {
+  const {setMainDoors} = doorHook;
   const [data, setData] = React.useState([
-    { label: "Vis alle", prop: "main", checked: true},                     // data[0]
-    { label: "Tradisjonell", prop: "tradisjonell", checked: false},     // data[3]
-    { label: "Moderne", prop: "moderne", checked: false},               // data[4]
-    { label: "Med glass", prop: "glass", checked: false},               // data[1]
-    { label: "Uten glass", prop: "uglass", checked: false},             // data[2]
+    {
+      label: "Vis alle",
+      prop: "main",
+      checked: true
+    },
+    { // data[0]
+      label: "Tradisjonell",
+      prop: "tradisjonell",
+      checked: false
+    },
+    { // data[3]
+      label: "Moderne",
+      prop: "moderne",
+      checked: false
+    },
+    { // data[4]
+      label: "Med glass",
+      prop: "glass",
+      checked: false
+    }, { // data[1]
+      label: "Uten glass",
+      prop: "uglass",
+      checked: false
+    }, // data[2]
   ]);
 
   React.useEffect(() => {
     const updateFieldChanged = index => e => {
       let newArr = [...data]; // copying the old datas array
       newArr[index] = e.target.value;
-      setData(newArr); 
-    };  
+      setData(newArr);
+    };
 
-    const checkedBoxes = data
-      .filter((box) => box.checked)
-      .map((box) => box.prop);
+    const checkedBoxes = data.filter((box) => box.checked).map((box) => box.prop);
 
     const fetchData = async () => {
       let doors = [];
 
       for (const prop of checkedBoxes) {
-        const {
-          data: { resources },
-        } = await getDoorsByProducer(prop);
+        const {data: {
+            resources
+          }} = await getDoorsByProducer(prop);
         doors.push(...resources);
       }
 
@@ -99,11 +121,10 @@ const MultiselectCheckbox = ({ doorHook }) => {
       // Count appearances
       const duplicates = [];
       // Looper alle dørene
-      for (const door of doors) {
-        // Om den er lagt til, inkrementer telleren
+      for (const door of doors) { // Om den er lagt til, inkrementer telleren
         if (doorCount[door.public_id]) {
           doorCount[door.public_id]++;
-          // Sjekker om det er likt antall duplikater som antall bokser checked. 
+          // Sjekker om det er likt antall duplikater som antall bokser checked.
           if (doorCount[door.public_id] === checkedBoxes.length) {
             duplicates.push(door);
           }
@@ -125,64 +146,131 @@ const MultiselectCheckbox = ({ doorHook }) => {
     const target = index;
     const newData = [...data];
     const oldObject = newData[index];
-    const newObject = { ...oldObject, checked: !oldObject["checked"] };
+    const newObject = {
+      ... oldObject,
+      checked: ! oldObject["checked"]
+    };
     newData[index] = newObject;
     // sets all to false, so we avoid filter problems
-    if(target == 0){
-      newData[1] = {...newData[1], checked: false}
-      newData[2] = {...newData[2], checked: false}
-      newData[3] = {...newData[3], checked: false}
-      newData[4] = {...newData[4], checked: false}
+    if (target == 0) {
+      newData[1] = {
+        ... newData[1],
+        checked: false
+      }
+      newData[2] = {
+        ... newData[2],
+        checked: false
+      }
+      newData[3] = {
+        ... newData[3],
+        checked: false
+      }
+      newData[4] = {
+        ... newData[4],
+        checked: false
+      }
 
     }
     // unchecks sibling
-    if(target == 1){
-      newData[0] = {...newData[0], checked: false} // unchecks view all
-      newData[1] = {...newData[1], checked: (newData[1].checked)}
-      newData[2] = {...newData[2], checked: (!newData[1].checked)} 
-      };
-    //unchecks sibling
-    if(target == 2){
-      newData[0] = {...newData[0], checked: false} //unchecks view all
-      newData[1] = {...newData[1], checked: (!newData[2].checked)}
-      newData[2] = {...newData[2], checked: (newData[2].checked)}
+    if (target == 1) {
+      newData[0] = {
+        ... newData[0],
+        checked: false
+      } // unchecks view all
+      newData[1] = {
+        ... newData[1],
+        checked: (newData[1].checked)
+      }
+      newData[2] = {
+        ... newData[2],
+        checked: (! newData[1].checked)
+      }
     };
     // unchecks sibling
-    if(target == 3){
-      newData[0] = {...newData[0], checked: false} // unchecks view all
-      newData[3] = {...newData[3], checked: (newData[3].checked)}
-      newData[4] = {...newData[4], checked: (!newData[3].checked)} 
-      };
-    //unchecks sibling
-    if(target == 4){
-      newData[0] = {...newData[0], checked: false} //unchecks view all
-      newData[3] = {...newData[3], checked: (!newData[4].checked)}
-      newData[4] = {...newData[4], checked: (newData[4].checked)}
+    if (target == 2) {
+      newData[0] = {
+        ... newData[0],
+        checked: false
+      } // unchecks view all
+      newData[1] = {
+        ... newData[1],
+        checked: (! newData[2].checked)
+      }
+      newData[2] = {
+        ... newData[2],
+        checked: (newData[2].checked)
+      }
+    };
+    // unchecks sibling
+    if (target == 3) {
+      newData[0] = {
+        ... newData[0],
+        checked: false
+      } // unchecks view all
+      newData[3] = {
+        ... newData[3],
+        checked: (newData[3].checked)
+      }
+      newData[4] = {
+        ... newData[4],
+        checked: (! newData[3].checked)
+      }
+    };
+    // unchecks sibling
+    if (target == 4) {
+      newData[0] = {
+        ... newData[0],
+        checked: false
+      } // unchecks view all
+      newData[3] = {
+        ... newData[3],
+        checked: (! newData[4].checked)
+      }
+      newData[4] = {
+        ... newData[4],
+        checked: (newData[4].checked)
+      }
     };
     setData(newData);
     console.log("newObject: " + newObject);
   };
 
   return (
-    <ItemWrapper id="wrapper">
-      {data.map((item, index) => {
-        return (
-          <MappedItems id="mappedItems" >
-            <Item
-              key={item.label}
-              style={
-                item.checked ? {backgroundColor: '#E5F2E4'} : {backgroundColor: '#F2E4E5'}
-              }
-              onClick={() => handleClick(index)}
-              >
-              <input readOnly type="checkbox" checked={item.checked} className="visually-hidden"/>
-              {item.label}
-            </Item>
-          </MappedItems>
-        );
-      })}
-    </ItemWrapper>
+    <div>
+      <Header>Velg type</Header>
+      <ItemWrapper id="wrapper">
+        {
+        data.map((item, index) => {
+          return (
+            <MappedItems id="mappedItems">
+              <Item key={
+                  item.label
+                }
+                style={
+                  item.checked ? {
+                    backgroundColor: '#E5F2E4'
+                  } : {
+                    backgroundColor: '#F2E4E5'
+                  }
+                }
+                onClick={
+                  () => handleClick(index)
+              }>
+                <input readOnly type="checkbox"
+                  checked={
+                    item.checked
+                  }
+                  className="visually-hidden"/> {
+                item.label
+              } </Item>
+            </MappedItems>
+          );
+        })
+      } </ItemWrapper>
+    </div>
   );
 };
 
-export { MultiselectCheckbox };
+export {
+  MultiselectCheckbox
+};
