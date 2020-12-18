@@ -32,7 +32,7 @@ const Button = styled.button `
   font-weight: 600;
   line-height: 37px;
   border-radius: 0px;
-  width: 90%;
+  width: 10em;
   text-decoration: none;
   &:hover {
     background-color: #148c44;
@@ -43,8 +43,34 @@ const Button = styled.button `
 const ButtonContainer = styled.div`
   margin-top: 2em;
   margin-bottom: 3em;
+  text-align: left;
+  margin-left: 10em;
+`
+const OrderContainer = styled.div`
+  text-align: left;
+  margin-left: 10em;
 `
 
+const WordFormatter = (word) => {
+  let result = word.split("/")[0]; // splits string on first "/""
+  result = result.replace(/_/g, " "); // replaces "_" with whitespace
+  result = result.split(' '); // split into array 
+  result[0] = result[0].replace(/./,x=>x.toUpperCase()); //sets first letter of first word to uppercase
+  result[1] = result[1].replace(/./,x=>x.toUpperCase()); //sets first letter of second word to uppercase
+  result = Array.prototype.join.call(result, " "); //joins the pseudo-array
+  return result;
+}
+
+const OrderText = ({doorHook}) => {
+  const {selectedDoor} = doorHook;
+
+  return(
+    <OrderContainer>
+      <p id="selectedDoorFormatted"> Du har valgt:  </p>
+      <b> {WordFormatter((selectedDoor.public_id))}</b> 
+    </OrderContainer>
+  )
+}
 
 const OrderLink = ({doorHook}) => {
   const { selectedDoor } = doorHook;
@@ -62,4 +88,4 @@ const OrderLink = ({doorHook}) => {
   
 }
 
-export {OrderLink}
+export {OrderLink, OrderText}

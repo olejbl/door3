@@ -80,16 +80,16 @@ const ImgUpload = styled.label`
   transition: all ease 250ms;
   letter-spacing: 1px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-  background-color: #058400;
-  border-color: #058400;
+  background-color: #8b3030;
+  border-color: #8b3030;
   color: #fff;
   font-weight: 400;
   border-radius: 0px;
   width: 300px;
   text-decoration: none;
   &:hover {
-    background-color: #148c44;
-    border-color: #148c44;
+    background-color: #97262C;
+    border-color: #97262C;
   }
 `;
 
@@ -109,7 +109,7 @@ const ImageUploader = ({ doorHook }) => {
   return (
     <UploaderWrapper>
       <ImgUpload htmlFor="inpImage">
-        <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '30px', margin: 'auto', display:'block'}}/>
+        <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '35px', margin: 'auto', display:'block'}}/>
         <span> </span>
         <p style={{fontSize: '20px'}}>Klikk her for å laste opp eget bilde </p>
         <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>

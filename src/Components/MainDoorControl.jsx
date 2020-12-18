@@ -7,10 +7,10 @@ const ControlsWrapper = styled.div`
   background-color: #ececec;
   /* min-height: 300px; */
   /* max-height: 370px; */
-  overflow-y: scroll;
+  overflow-y: hidden;
   min-width: 900px;
   position: relative;
-  margin-bottom: 2em;
+  margin-bottom: 0em;
 `;
 
 const DoorPicker = styled.div`
@@ -20,7 +20,7 @@ const DoorPicker = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0em;
-  width: 95%;
+  width: 900px;
   margin: auto;
   background-color: #ececec;
   justify-content: left;

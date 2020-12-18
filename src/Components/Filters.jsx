@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 0px 16px 24px 16px;
   box-sizing: border-box;
+  text-align: left;
 `;
 
 const ItemWrapper = styled.div`
@@ -20,13 +21,13 @@ const ItemWrapper = styled.div`
 const Item = styled.div`
   height: 38px;
   position: relative;
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   box-sizing: border-box;
   //width: 100%; // 90
-  border-radius: 2px;
+  border-radius: 0px;
   margin-bottom: 10px;
   background: white;
-  vertical-align: middle;
+  vertical-align: left;
 `;
 
 const MappedItems = styled.div`

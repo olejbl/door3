@@ -27,7 +27,7 @@ const DoorPreviewBackground = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  background-color: #CECECE;
+  background-color: #ececec;
   position: relative;
   width: 900px;
   height: 500px;
@@ -52,7 +52,7 @@ const DoorPreviewBackground = styled.div`
     fill: none;
     pointer-events: all;
     stroke: #fff;
-    stroke-width: 2px;
+    stroke-width: 1px;
     cursor: move;
   }
 `;
@@ -308,7 +308,7 @@ const TransformedDoor = ({ doorHook }) => {
 const DoorPreviewer = ({doorHook}) => {
   const {background, selectedDoor} = doorHook;
   return (
-    <div id='transformBakgrunn' style={{backgroundColor: '#CECECE'}}>
+    <div id='transformBakgrunn' style={{backgroundColor: '#ececec'}}>
       <DoorPreviewBackground bg={background}>
         <TransformedDoor doorHook={doorHook}/>
       </DoorPreviewBackground>
