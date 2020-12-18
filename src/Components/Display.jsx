@@ -118,6 +118,7 @@ const ResetButton = styled.button `
   transition: all ease 250ms;
   letter-spacing: 1px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+  border-radius: 2px;
   margin: 0;
   padding: 0 1.3em;
   position: relative;
@@ -191,10 +192,13 @@ const TransformedDoor = ({ doorHook }) => {
   }
 
   const handleMouseMove = (evt) => {
-    if (evt.target.localName === 'svg') {
-      const offset = evt.target.getBoundingClientRect();
+    //console.log(evt.target.localName);
+    const offset = document.getElementById('draggableCircles').getBoundingClientRect(); // TODO change target to svg?
+    if (evt.target.localName === 'circle' || evt.target.localName === 'svg') {
       const x = evt.clientX - offset.left - doorOffset.x; 
       const y = evt.clientY - offset.top - doorOffset.y; 
+      console.log(evt.target.localName, " ",x," x, ",y," y, bounding:", evt.target.getBoundingClientRect())
+      console.log("Moved")
       if (mouseState.targetCircle >= 0) {
         if (mouseState === 4) {
           console.log('Moving door');
@@ -287,7 +291,7 @@ const TransformedDoor = ({ doorHook }) => {
            publicId={selectedDoor.public_id} width={doorWidth} height={doorHeight} q="100" loading="lazy" />
         </ImageWrapper>
       </CloudinaryContext>
-      <CircleWrapper viewBox='0 0 900 500' onMouseMove={handleMouseMove} onTouchMove={handleTouchMove} >
+      <CircleWrapper viewBox='0 0 900 500' id='draggableCircles' onMouseMove={handleMouseMove} onTouchMove={handleTouchMove} >
         <g transform={`translate(${doorOffset.x}, ${doorOffset.y})`}>
           <circle
             className="handle"
