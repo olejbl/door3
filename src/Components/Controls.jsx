@@ -110,9 +110,8 @@ const ImageUploader = ({ doorHook }) => {
     <UploaderWrapper>
       <ImgUpload htmlFor="inpImage">
         <Icon icon={camera} style={{color: '#FFFFFF', fontSize: '35px', margin: 'auto', display:'block'}}/>
-        <span> </span>
         <p style={{fontSize: '20px'}}>Klikk her for å laste opp eget bilde </p>
-        <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
+        <p>For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
         <input type="file" name="inpImage" id="inpImage" onChange={handleFileChange} style={{display:"none"}}/>
       </ImgUpload>
       <h4>Velg type</h4> 
