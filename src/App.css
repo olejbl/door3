@@ -1,9 +1,8 @@
-.App {
+.app {
   text-align: center;
   z-index:0;
   font-family: Lato;
   margin: auto;
-  width: 95vw;
 }
 /* p {
   text-align: left;

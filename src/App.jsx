@@ -38,7 +38,7 @@ function App() {
       })
 
     return (
-        <AppWrapper className="App">
+        <AppWrapper className="app">
             <Grid>
                 {/* <Row>
                     <Col size={1}>
