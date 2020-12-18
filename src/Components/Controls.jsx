@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {CloudinaryContext, Image} from 'cloudinary-react';
 import { Icon } from '@iconify/react';
-import cameraFilled from '@iconify/icons-ant-design/camera-filled';
+import camera from '@iconify/icons-ant-design/camera';
 
 const ControlsWrapper = styled.div`
   z-index: 100;
@@ -109,7 +109,7 @@ const ImageUploader = ({ doorHook }) => {
   return (
     <UploaderWrapper>
       <ImgUpload htmlFor="inpImage">
-        <Icon icon={cameraFilled} style={{color: '#FFFFFF', fontSize: '35px', margin: 'auto', display:'block'}}/>
+        <Icon icon={camera} style={{color: '#FFFFFF', fontSize: '35px', margin: 'auto', display:'block'}}/>
         <span> </span>
         <p style={{fontSize: '20px'}}>Klikk her for å laste opp eget bilde </p>
         <p> For best resultater, ta bildet i godt sollys. Du bør ta bildet i liggende format.</p>
