@@ -10,7 +10,81 @@ const ControlsWrapper = styled.div`
   overflow-y: hidden;
   min-width: 900px;
   position: relative;
-  margin-bottom: 0em;
+  margin-bottom: 1rem;
+
+    /* Scrollbar style for Chrome */
+
+  /* Track */
+  #doorPicker::-webkit-scrollbar
+  {
+    width: 2em;
+    height: 2em;
+  }
+
+  #doorPicker::-webkit-scrollbar-track
+  {
+    background: no-repeat #cecece;
+    background-size
+    border: solid 2px rgba(33,33,33,0.5);
+  }
+
+
+  /* Thumb */
+  #doorPicker::-webkit-scrollbar-thumb
+  {
+    background: #97262c;
+  }
+
+  #doorPicker::-webkit-scrollbar-thumb:hover
+  {
+    background: #505050;
+  }
+
+  #doorPicker::-webkit-scrollbar-thumb:active
+  {
+    background: #404040;
+  }
+
+  /* #doorPicker::-webkit-scrollbar-thumb:horizontal
+  {
+    border-right: solid 2px rgba(33,33,33,0.5);
+    border-left: solid 2px rgba(33,33,33,0.5);
+  } */
+
+
+  /* Buttons 
+  #doorPicker::-webkit-scrollbar-button
+  {
+    border-style: solid;
+    height: 55px;
+    width: 55px;
+  } */
+
+  /* Left
+  #doorPicker::-webkit-scrollbar-button:horizontal:decrement
+  {
+    border-width: 1rem 2rem 1rem 0;
+    border-color: transparent #97262c transparent #404040;
+  }
+
+  #doorPicker::-webkit-scrollbar-button:horizontal:decrement:hover
+  {
+    border-color: transparent #505050 transparent transparent;
+  }
+
+
+  Right 
+  #doorPicker::-webkit-scrollbar-button:horizontal:increment
+  {
+    border-width: 1rem 0rem 1rem 2rem;
+    border-color: transparent transparent transparent #97262c;
+  }
+
+  #doorPicker::-webkit-scrollbar-button:horizontal:increment:hover
+  {
+    border-color: transparent transparent transparent #505050;
+  }
+  */
 `;
 
 const DoorPicker = styled.div`
@@ -71,7 +145,7 @@ const MainDoorControl = ({ doorHook }) => {
         <Header>
           Dørvelgeren: Velg modell
         </Header>
-        <DoorPicker>
+        <DoorPicker id="doorPicker">
           {mainDoors.map((door) => {
             if (true) {
               return (

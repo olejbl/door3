@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const BackgroundImages = styled.div`
+  margin: auto;
+  text-align: center;
   & img {
     width: 10em;
     height: 10em;
