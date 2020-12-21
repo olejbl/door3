@@ -381,12 +381,12 @@ const TransformedDoor = ({ doorHook }) => {
           id="gElement"
           transform={`translate(${doorOffset.x}, ${doorOffset.y})`}
         >
-          <circle
+          {/* <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(4)}
             transform={`translate(${(corners[2].x + corners[0].x)/2}, ${(corners[3].y + corners[1].y)/2})`}
             r="10"
-          />
+          /> */}
           <circle
             className="handle"
             onMouseDown={() => handleCirleChoice(0)}
