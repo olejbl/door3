@@ -229,13 +229,11 @@ const TransformedDoor = ({ doorHook }) => {
       const y = evt.clientY - offset.top - doorOffset.y;
       const mouseX = evt.clientX - offset.left - doorOffset.x;
       const mouseY = evt.clientY - offset.top - doorOffset.y;
-      console.log("Moving ", evt.target.localName);
 
       clearTimeout(debounce.current);
       debounce.current = setTimeout(() => {
         if (mouseState.targetCircle >= 0) {
           if (mouseState.targetCircle === 4) {
-            console.log("last corners: ", lastCorners," mouse: ", mouseX,",",mouseY);
             setCorners({
               0: {
                 x: mouseX - lastCorners.current[0].x,

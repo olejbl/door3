@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { CloudinaryContext, Image } from "cloudinary-react";
+import { Icon, InlineIcon } from "@iconify/react";
+import swipeIcon from "@iconify-icons/iwwa/swipe";
+// npm install --save-dev @iconify/react @iconify-icons/eva
+import arrowIosBackOutline from "@iconify-icons/eva/arrow-ios-back-outline";
+import arrowIosForwardFill from "@iconify-icons/eva/arrow-ios-forward-fill";
 
 const ControlsWrapper = styled.div`
   z-index: 100;
@@ -11,37 +16,33 @@ const ControlsWrapper = styled.div`
   min-width: 900px;
   position: relative;
   margin-bottom: 1rem;
+  #swipeIcon {
+  }
+  text-align: center;
 
-    /* Scrollbar style for Chrome */
+  /* Scrollbar style for Chrome */
 
   /* Track */
-  #doorPicker::-webkit-scrollbar
-  {
+  #doorPicker::-webkit-scrollbar {
     width: 2em;
     height: 2em;
   }
 
-  #doorPicker::-webkit-scrollbar-track
-  {
+  #doorPicker::-webkit-scrollbar-track {
     background: no-repeat #cecece;
-    background-size
-    border: solid 2px rgba(33,33,33,0.5);
+    border: solid 2px rgba(33, 33, 33, 0.5);
   }
 
-
   /* Thumb */
-  #doorPicker::-webkit-scrollbar-thumb
-  {
+  #doorPicker::-webkit-scrollbar-thumb {
     background: #97262c;
   }
 
-  #doorPicker::-webkit-scrollbar-thumb:hover
-  {
+  #doorPicker::-webkit-scrollbar-thumb:hover {
     background: #505050;
   }
 
-  #doorPicker::-webkit-scrollbar-thumb:active
-  {
+  #doorPicker::-webkit-scrollbar-thumb:active {
     background: #404040;
   }
 
@@ -51,47 +52,47 @@ const ControlsWrapper = styled.div`
     border-left: solid 2px rgba(33,33,33,0.5);
   } */
 
-
-  /* Buttons 
-  #doorPicker::-webkit-scrollbar-button
+  /* Buttons
+  #doorPicker::-webkit-scrollbar-button:single-button
   {
+    background-color: #000000;
+    display: block;
     border-style: solid;
-    height: 55px;
-    width: 55px;
-  } */
+    height: 20px;
+    width: 20px;
+  } 
 
-  /* Left
+  Left
   #doorPicker::-webkit-scrollbar-button:horizontal:decrement
   {
     border-width: 1rem 2rem 1rem 0;
     border-color: transparent #97262c transparent #404040;
   }
 
-  #doorPicker::-webkit-scrollbar-button:horizontal:decrement:hover
+  #doorPicker::-webkit-scrollbar-button:single-button:horizontal:decrement:hover
   {
     border-color: transparent #505050 transparent transparent;
   }
 
-
+  
   Right 
-  #doorPicker::-webkit-scrollbar-button:horizontal:increment
+  #doorPicker::-webkit-scrollbar-button:single-button:horizontal:increment
   {
     border-width: 1rem 0rem 1rem 2rem;
     border-color: transparent transparent transparent #97262c;
   }
 
-  #doorPicker::-webkit-scrollbar-button:horizontal:increment:hover
+  #doorPicker::-webkit-scrollbar-button:single-button:horizontal:increment:hover
   {
     border-color: transparent transparent transparent #505050;
-  }
-  */
+  } */
 `;
 
 const DoorPicker = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  overflow-x: auto;
+  overflow-x: scroll;
   overflow-y: hidden;
   padding: 0em;
   width: 900px;
@@ -113,6 +114,12 @@ const Header = styled.div`
   font-weight: 500;
 `;
 
+const scrollLeft = () => {
+  document.getElementById("doorPicker").scrollLeft -= 200;
+};
+const scrollRight = () => {
+  document.getElementById("doorPicker").scrollLeft += 200;
+};
 
 const MainDoorControl = ({ doorHook }) => {
   const {
@@ -138,13 +145,12 @@ const MainDoorControl = ({ doorHook }) => {
     setProducer(value);
   };
 
-
   return (
     <CloudinaryContext cloudName="dikc1xnkv">
-      <ControlsWrapper>
-        <Header>
-          Dørvelgeren: Velg modell
-        </Header>
+      <Header>
+        Dørvelgeren: Velg modell
+      </Header>
+      <ControlsWrapper id="controlsWrapper">
         <DoorPicker id="doorPicker">
           {mainDoors.map((door) => {
             if (true) {
@@ -169,6 +175,27 @@ const MainDoorControl = ({ doorHook }) => {
             }
           })}
         </DoorPicker>
+        <Icon
+          icon={arrowIosBackOutline}
+          color="#97262c"
+          width="2rem"
+          height="2rem"
+          onClick={() => scrollLeft()}
+        />
+        <Icon
+          id="swipeIcon"
+          icon={swipeIcon}
+          color="#97262C"
+          width="2rem"
+          height="2rem"
+        />
+        <Icon
+          icon={arrowIosForwardFill}
+          color="#97262c"
+          width="2rem"
+          height="2rem"
+          onClick={() => scrollRight()}
+        />
       </ControlsWrapper>
     </CloudinaryContext>
   );
